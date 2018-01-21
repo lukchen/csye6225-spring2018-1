@@ -24,7 +24,7 @@
 
 <script>
 /**
- * @author {benyuwan@gmail.com}
+ * @author {chen.zena@husky.neu.edu}
  * @file Hello World
  */
 

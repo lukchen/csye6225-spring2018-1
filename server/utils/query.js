@@ -1,5 +1,5 @@
 /**
- * @author {benyuwan@gmail.com}
+ * @author {chen.zena@husky.neu.edu}
  * @file 初始化数据库并用Promise封装数据库操作
  */
 

@@ -1,5 +1,5 @@
 /**
- * @author {benyuwan@gmail.com}
+ * @author {chen.zena@husky.neu.edu}
  * @file 操作token的api
  */
 

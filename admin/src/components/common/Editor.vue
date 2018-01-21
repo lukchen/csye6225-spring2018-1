@@ -28,7 +28,7 @@
 
 <script>
 /**
- * @author {benyuwan@gmail.com}
+ * @author {chen.zena@husky.neu.edu}
  * @file SimpleMDE组件
  * */
 import 'font-awesome/css/font-awesome.min.css'

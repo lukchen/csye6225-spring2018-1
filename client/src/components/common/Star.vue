@@ -6,7 +6,7 @@
 
 <script>
     /**
-     * @author {benyuwan@gmail.com}
+     * @author {chen.zena@husky.neu.edu}
      * @file 评分组件
      */
 

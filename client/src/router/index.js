@@ -1,5 +1,5 @@
 /**
- * @author {benyuwan@gmail.com}
+ * @author {chen.zena@husky.neu.edu}
  * @file client端路由文件
  */
 import Vue from 'vue'

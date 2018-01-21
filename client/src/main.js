@@ -1,5 +1,5 @@
 /**
- * @author {benyuwan@gmail.com}
+ * @author {chen.zena@husky.neu.edu}
  * @file client端入口文件
  */
 // The Vue build version to load with the `import` command

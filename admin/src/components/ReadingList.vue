@@ -49,7 +49,7 @@
 
 <script>
 /**
- * @author {benyuwan@gmail.com}
+ * @author {chen.zena@husky.neu.edu}
  * @file 阅读列表的后台管理组件
  * */
 import Star from '@/components/common/Star'

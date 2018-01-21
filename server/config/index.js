@@ -1,5 +1,5 @@
 /**
- * @author {benyuwan@gmail.com}
+ * @author {chen.zena@husky.neu.edu}
  * @file server端配置文件
  */
 

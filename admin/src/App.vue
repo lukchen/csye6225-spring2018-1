@@ -10,7 +10,7 @@
 
 <script>
 /**
- * @author {benyuwan@gmail.com}
+ * @author {chen.zena@husky.neu.edu}
  * @file admin端根组件
  */
 

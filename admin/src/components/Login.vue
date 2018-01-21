@@ -18,7 +18,7 @@
 
 <script>
 /**
- * @author {benyuwan@gmail.com}
+ * @author {chen.zena@husky.neu.edu}
  * @file admin端登录页
  */
 

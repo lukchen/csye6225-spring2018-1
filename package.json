@@ -2,7 +2,7 @@
   "name": "ashen-blog",
   "version": "1.0.0",
   "description": "ashen's blog, koa 2.x + vue 2.x ",
-  "author": "StudentWan <benyuwan@gmail.com>",
+  "author": "StudentWan <chen.zena@husky.neu.edu>",
   "private": true,
   "scripts": {
     "start": "pm2 start server/config/pm2_config.json",

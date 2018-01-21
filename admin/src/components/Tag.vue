@@ -30,7 +30,7 @@
 
 <script>
 /**
- * @author {benyuwan@gmail.com}
+ * @author {chen.zena@husky.neu.edu}
  * @file 标签管理组件
  * */
 import ArticleList from '@/components/common/ArticleList'

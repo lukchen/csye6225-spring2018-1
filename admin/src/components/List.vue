@@ -18,7 +18,7 @@
 
 <script>
 /**
- * @author {benyuwan@gmail.com}
+ * @author {chen.zena@husky.neu.edu}
  * @file 列表管理文章
  * */
 import ArticleList from '@/components/common/ArticleList'

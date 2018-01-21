@@ -21,7 +21,7 @@
 
 <script>
 /**
- * @author {benyuwan@gmail.com}
+ * @author {chen.zena@husky.neu.edu}
  * @file 顶部公用导航栏组件
  * */
 

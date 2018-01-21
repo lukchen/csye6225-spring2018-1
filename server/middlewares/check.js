@@ -1,6 +1,6 @@
 /**
  * @file 检查文章格式的中间件
- * @author {benyuwan@gmail.com}
+ * @author {chen.zena@husky.neu.edu}
  */
 
 export default async function (ctx, next) {

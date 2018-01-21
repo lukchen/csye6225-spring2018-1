@@ -29,7 +29,7 @@
 
 <script>
 /**
- * @author {benyuwan@gmail.com}
+ * @author {chen.zena@husky.neu.edu}
  * @file 左侧公用导航栏组件
  * */
 export default {}
