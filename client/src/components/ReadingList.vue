@@ -5,13 +5,13 @@
             <tr>
                 <th>书名</th>
                 <th>作者</th>
-                <th>ashenの评分</th>
+                <th>wait...</th>
             </tr>
             <tr v-for="{name, author, score} in books">
                 <td class="col-1">{{ name }}</td>
                 <td class="col-2">{{ author }}</td>
                 <td class="col-3">
-                    <star :score="score"></star>
+                   
                 </td>
             </tr>
         </table>
@@ -24,11 +24,9 @@
  * @file 阅读列表组件
  */
 
-import Star from '@/components/common/Star'
-
 export default {
     components: {
-        Star
+        
     },
     data() {
         return {

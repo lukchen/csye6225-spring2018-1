@@ -1,10 +1,10 @@
 <template>
     <div id="app">
-        <header-nav :maskFlag="maskFlag"></header-nav>
+        <header-nav></header-nav>
         <div id="main" @click="sweepMask">
             <router-view/>
         </div>
-        <footer>本博客由<a class="github" href="https://github.com/StudentWan/ashen-blog" target="_blank">Ashen Blog系统</a>提供支持.</footer>
+        <footer>Powered by<a class="github" href="https://github.com/lukchen/csye6225-spring2018" target="_blank">  Eli blog system</a></footer>
     </div>
 </template>
 
@@ -23,13 +23,14 @@
         },
         data() {
             return {
-                maskFlag: false
+                maskFlag: false,
+                
             }
         },
         methods: {
             sweepMask() {
                 this.maskFlag = !this.maskFlag
-            }
+            },
         }
     }
 </script>
@@ -40,7 +41,7 @@
         width: 95%;
         max-width: 850px;
         text-align: center;
-        font-size: 1.4rem;
+        font-size: 2.4rem;
         margin: 0 auto;
         padding: 2em 0;
         color: $special;
