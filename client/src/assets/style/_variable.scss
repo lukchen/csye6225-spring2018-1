@@ -1,0 +1,44 @@
+// sass-resources-loader加载该文件，用于在每个文件导入mixin和variables
+// 但不可用于做全局样式文件，因为在每个文件中导入，路径并不统一
+
+// 基础配色
+$white: #fefdff;
+$black: #000;
+
+// 系统配色
+$title: #2c3e50;
+$word: #34495e;
+$base: #f18f01;
+$quote: #99c24d;
+$special: #c1bfb5;
+
+@mixin chosen-item {
+    border-bottom: 3px solid $base;
+}
+
+@mixin flex($flow: row wrap, $justify: center, $align: center) {
+    display: flex;
+    flex-flow: $flow;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin fix($left: 0px, $top: 0px) {
+    position: fixed;
+    left: $left;
+    top: $top;
+}
+
+@mixin clear-fix($element) {
+    #{$element}:before,
+    #{$element}:after {
+        content: "";
+        display: table;
+    }
+    #{$element}:after {
+        clear: both;
+    }
+    #{$element} {
+        *zoom: 1;
+    }
+}
