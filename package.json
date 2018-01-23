@@ -38,6 +38,8 @@
     "mysql": "^2.15.0",
     "simplemde": "^1.11.2",
     "vue": "^2.4.2",
+    "vue-clock": "^0.3.1",
+    "vue-digital-clock": "^1.5.0",
     "vue-router": "^2.7.0",
     "vue-simplemde": "^0.4.6",
     "vuex": "^3.0.0"
@@ -84,6 +86,7 @@
     "shelljs": "^0.7.6",
     "source-map-support": "^0.5.0",
     "url-loader": "^0.5.8",
+    "vue-clock-simple": "^1.0.4",
     "vue-loader": "^13.0.4",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.4.2",
