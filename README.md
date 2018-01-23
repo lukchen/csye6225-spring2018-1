@@ -1,3 +1,9 @@
+# Team member
+* Chen Qiu  qiu.che@husky.neu.edu
+* Xinglong Jia  jia.xi@husky.neu.edu
+* Zenan Chen  chen.zena@husky.neu.edu
+
+
 # travis-ci-demo
 
 [![Build Status](https://travis-ci.org/justjavac/travis-ci-demo.svg?branch=master)](https://travis-ci.org/justjavac/travis-ci-demo)
