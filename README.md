@@ -6,5 +6,9 @@
 
 travis-ci-demo
 
+chen qiu        qiu.che@northeastern.edu
+zenan chen      chen.zena@husky.neu.edu
+xinglong jia    jia.xi@husky.neu.edu
+
 
 
