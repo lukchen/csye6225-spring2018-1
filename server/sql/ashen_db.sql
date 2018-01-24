@@ -110,7 +110,7 @@ LOCK TABLES `USER` WRITE;
 
 INSERT INTO `USER` (`id`, `user`, `password`)
 VALUES
-	(1,'admin','e5d2a815230449badccf00bc67436696');
+	(1,'chen.zena@husky.neu.edu','e5d2a815230449badccf00bc67436696');
 
 /*!40000 ALTER TABLE `USER` ENABLE KEYS */;
 UNLOCK TABLES;

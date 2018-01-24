@@ -1,18 +1,17 @@
 <template>
     <div class="login-container">
         <header class="login-head">
-            <span>无火的余灰</span>
-            <img class="logo" src="../assets/img/logo.png" alt="营火">
         </header>
         <section class="form">
-            <span class="slogan">登登登登...录!
+            <span class="slogan">Please Login!
                 <span>/ Login</span>
             </span>
             <input type="text" id="user" placeholder="Username" v-model="username">
             <input type="password" id="password" placeholder="Password" v-model="password">
-            <button id="login" @click="login">登录</button>
+            <button id="login" @click="login">Login</button>
+            <button id="sign up" @click="signup">Sign up</button>
         </section>
-        <footer>Always.</footer>
+        <footer></footer>
     </div>
 </template>
 
@@ -28,12 +27,16 @@ export default {
     data() {
         return {
             username: '',
-            password: ''
+            password: '',
+            message:''
         }
     },
     methods: {
         login() {
-            axios.post(
+
+             if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.username))
+              {
+                axios.post(
                 '/api/v1/tokens',
                 {
                     username: this.username,
@@ -48,6 +51,37 @@ export default {
                     const errorMsg = err.response.data.error
                     alert(errorMsg)
                 })
+              }else{
+                alert("You have entered an invalid email address!")
+                return (false)
+            }
+        },
+
+        signup() {
+
+            if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.username))
+            {
+                axios.post(
+                '/api/v1/signup',
+                {
+                    username: this.username,
+                    password: md5(this.password)
+                })
+                .then(res => {
+                    this.message = res.data
+                    if(this.message=="This username already exists!"){
+                        alert('This username already exists!')
+                    }else if(this.message=="Sign up successfull!"){
+                        alert('Sign up successfull!')
+                    }
+                })
+                .catch(err => alert(err))
+
+                
+            }else{
+                alert("You have entered an invalid email address!")
+                return (false)
+            }
         }
     }
 }

@@ -3,12 +3,17 @@
         <div class="logo-container">
             <img src="../../assets/img/logo.png" alt="" class="logo">
         </div>
+             
         <div class="content-container">
             <section>
                 <h4 class="title">
                     无火的余灰
                 </h4>
             </section>
+            <section>
+                <Clock :blink="true" />
+            </section>
+            <vue-clock></vue-clock>
             <a class="log-out" @click="logOut">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-tuichu"></use>
@@ -24,8 +29,13 @@
  * @author {chen.zena@husky.neu.edu}
  * @file 顶部公用导航栏组件
  * */
+import Clock from 'vue-digital-clock'
+
 
 export default {
+    components: {
+        Clock
+    },
     methods: {
         logOut() {
             localStorage.removeItem('ashenToken')
