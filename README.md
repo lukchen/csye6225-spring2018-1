@@ -1,14 +1,27 @@
-# travis-ci-demo
+# Team member
+* Chen Qiu  qiu.che@husky.neu.edu
+* Xinglong Jia  jia.xi@husky.neu.edu
+* Zenan Chen  chen.zena@husky.neu.edu
 
-[![Build Status](https://travis-ci.org/justjavac/travis-ci-demo.svg?branch=master)](https://travis-ci.org/justjavac/travis-ci-demo)
-[![Coverage Status](https://coveralls.io/repos/github/justjavac/travis-ci-demo/badge.svg?branch=master)](https://coveralls.io/github/justjavac/travis-ci-demo?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ef1bf2a964f54ccea507370fc165f084)](https://www.codacy.com/app/justjavac/travis-ci-demo?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=justjavac/travis-ci-demo&amp;utm_campaign=Badge_Grade)
+Application stack: MySQL--Linux--Node.js(koa)-Vue.js
 
-travis-ci-demo
+This web application is a seperation of back-end and front-end and use axios to send data, it basiclly contains three parts: server, client, admin.
 
-chen qiu        qiu.che@northeastern.edu
-zenan chen      chen.zena@husky.neu.edu
-xinglong jia    jia.xi@husky.neu.edu
+MySQL port is default 3306.
+
+Server: server side as RESTful architectural style, responsible for communication with client/admin side. Used JWT achieves authentication system. It is listening at http://localhost:3000/
+
+start server as dev: npm run dev-server   ## Attention, you must run server first, then run client or admin
+
+
+Client: show the front-end, It is listening at http://localhost:8080/(only admin and server running) or 8081(admin, client, server all running), 
+
+start client as dev: npm run dev-client
+
+
+Admin: application management, provides sign in/sign up modules, It is listening at http://localhost:8080/ or 8081(same as above situations)
+
+start admin as dev: npm run dev-admin
 
 
 
