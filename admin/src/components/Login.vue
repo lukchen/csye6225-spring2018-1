@@ -22,13 +22,14 @@
  */
 
 import md5 from 'md5'
+var bcrypt = require('bcryptjs');
 
 export default {
     data() {
         return {
             username: '',
             password: '',
-            message:''
+            message:'',
         }
     },
     methods: {
@@ -36,11 +37,12 @@ export default {
 
              if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.username))
               {
+                                
                 axios.post(
                 '/api/v1/tokens',
                 {
                     username: this.username,
-                    password: md5(this.password)
+                    password: this.password
                 })
                 .then(res => {
                     const data = res.data
@@ -61,11 +63,13 @@ export default {
 
             if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.username))
             {
+                var salt = bcrypt.genSaltSync(10);
+                this.password = bcrypt.hashSync(this.password, salt);
                 axios.post(
                 '/api/v1/signup',
                 {
                     username: this.username,
-                    password: md5(this.password)
+                    password: this.password,
                 })
                 .then(res => {
                     this.message = res.data
