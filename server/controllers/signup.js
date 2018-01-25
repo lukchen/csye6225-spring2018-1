@@ -10,7 +10,7 @@ class SignupControllers {
     async signupUser(ctx) {
         const {
             username,
-            password
+            password,
         } = ctx.request.body
         const res = (await User.findUser(username))[0]
         if (res) {
