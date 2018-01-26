@@ -1,10 +1,10 @@
-#Team member
+## Team member
 * Chen Qiu  qiu.che@husky.neu.edu
 * Xinglong Jia  jia.xi@husky.neu.edu
 * Zenan Chen  chen.zena@husky.neu.edu
 
 
-##Sign up/ Sign in
+## Sign up/ Sign in
 
   This project accomplised a website sign up/ sign in function, user's information will be store in database and password will be encrypted,
   This web application is a seperation of back-end and front-end and use axios to send data, it basiclly contains three parts: server, client, admin.
@@ -13,7 +13,7 @@
 
 Application stack: MySQL--Linux--Node.js(koa)-Vue.js
 
-##installing
+## installing
 install MySQL
 ```
 $ sudo apt-get update
