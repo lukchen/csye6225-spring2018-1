@@ -15,11 +15,11 @@
                 <span class="tag-add" @click="toggleInput" v-else>+</span>
             </section>
             <section class="btn-container">
-                <button id="delete" class="delete" @click="deleteArticle">删除文章</button>
-                <button id="submit" class="not-del" @click="publishArticle">发布文章</button>
+                <button id="delete" class="delete" @click="deleteArticle">delete</button>
+                <button id="submit" class="not-del" @click="publishArticle">publish</button>
             </section>
         </div>
-        <p class="tips" v-if="$route.path !== '/lists'">标签查询页面只能批量更改标签，修改的文章内容会自动保存。</p>
+        <p class="tips" v-if="$route.path !== '/'"></p>
         <div class="content">
             <textarea></textarea>
         </div>
@@ -50,7 +50,7 @@ export default {
     mounted() {
         this.simplemde = new SimpleMDE({
             autoDownloadFontAwesome: false,
-            placeholder: 'Talk to me, Ashen one...',
+            placeholder: 'Talk to me...',
             spellChecker: false
         })
         // 切换路由时可能出现id没有改变的情况，此时将store中保存的值赋给data的属性
