@@ -31,16 +31,16 @@ class TokenControllers {
                 ctx.body = token
             }
             else {
-                ctx.throw(401, '密码错误')
+                ctx.throw(401, 'Wrong password! Please try again...')
             }
         }
         else {
-            ctx.throw(401, '用户名错误')
+            ctx.throw(401, 'Wrong username! Please try again...')
         }
     }
 
     checkToken(ctx) {
-        ctx.body = '验证通过'
+        ctx.body = 'Congratulation! Welcome...'
     }
 }
 

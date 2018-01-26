@@ -1,25 +1,28 @@
 <template>
     <div class="list-container main">
-        <h2>文章列表 /
-            <span>ARTICLE LIST</span>
-        </h2>
+        
+        <div class="jumbotron">
+                    <h1 class="display-3">Hello, Cloud Computing!</h1>
+                    <p class="lead">
+                        This is a simple website for login/signup
+                    </p>
+                    <hr class="my-4">
+                    <p> Vuejs+nodejs(koa)+mySQL</p>
+                    
+        </div>
         <hr>
-        <main>
-            <div class="article-list">
-                <section class="btn-container">
-                    <button id="add" class="not-del" @click="postArticle">新文章</button>
-                </section>
-                <article-list ref="articleList"></article-list>
-            </div>
-            <editor></editor>
-        </main>
+        
+        <editor></editor>
+        
     </div>
 </template>
 
 <script>
 /**
  * @author {chen.zena@husky.neu.edu}
- * @file 列表管理文章
+ *         {jia.xi@huaksy.neu.edu}
+ *         {qiu.che@husky.neu.edu}
+ * @file welcom page
  * */
 import ArticleList from '@/components/common/ArticleList'
 import Editor from '@/components/common/Editor'
@@ -57,28 +60,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-main {
-    @include flex($justify: space-between);
-    height: calc(100% - 48px);
-    padding: 0.5em 0;
-}
-
-.article-list {
-    width: 40%;
-    height: 100%;
-    overflow: auto;
-    padding: 0 0.8em 0.5em 0;
-    .list {
-        // margin: 0;
-        padding: 0;
-        list-style: none;
+    .jumbotron{
+        margin-top: 7em;
+        background-color: rgba(255, 255, 255, 0.8)
     }
-}
 
-.editor {
-    width: 58%;
-    height: 100%;
-    padding: 0 0.8em 0.5em 0;
-    overflow: auto;
-}
 </style>
