@@ -1,11 +1,36 @@
-# Team member
+#Team member
 * Chen Qiu  qiu.che@husky.neu.edu
 * Xinglong Jia  jia.xi@husky.neu.edu
 * Zenan Chen  chen.zena@husky.neu.edu
 
+
+##Sign up/ Sign in
+
+  This project accomplised a website sign up/ sign in function, user's information will be store in database and password will be encrypted,
+  This web application is a seperation of back-end and front-end and use axios to send data, it basiclly contains three parts: server, client, admin.
+
+## Prerequisites
+
 Application stack: MySQL--Linux--Node.js(koa)-Vue.js
 
-This web application is a seperation of back-end and front-end and use axios to send data, it basiclly contains three parts: server, client, admin.
+##installing
+install MySQL
+```
+$ sudo apt-get update
+$ sudo apt-get install mysql-server
+$ mysql_secure_installation
+
+```
+install npm
+```
+$ sudo apt-get update && sudo apt-get -y upgrade
+```
+install Nodejs
+```
+curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+sudo apt-get install -y nodejs
+```
+## Deployment
 
 MySQL port is default 3306.
 
@@ -24,7 +49,14 @@ Admin: application management, provides sign in/sign up modules, It is listening
 start admin as dev: npm run dev-admin
 
 
-q333333
+## Contributing
+
+1. Fork it (<https://github.com/yourname/yourproject/fork>)
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
+
 
 
 

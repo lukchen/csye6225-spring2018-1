@@ -63,7 +63,7 @@ LOCK TABLES `ARTICLE` WRITE;
 
 INSERT INTO `ARTICLE` (`id`, `title`, `tags`, `createTime`, `publishTime`, `content`, `isPublished`)
 VALUES
-	(220,'欢迎来到Ashen Blog!','Blog','2018-01-02 16:05:45','2018-01-02 16:07:26','Enjoy ur self here!\n\n<!-- more -->\n\n```js\nconsole.log(\'Hello World!\')\n```',1);
+	(220,'Welcome To Ashen Blog!','Blog','2018-01-02 16:05:45','2018-01-02 16:07:26','Enjoy ur self here!\n\n<!-- more -->\n\n```js\nconsole.log(\'Hello World!\')\n```',1);
 
 /*!40000 ALTER TABLE `ARTICLE` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -87,7 +87,7 @@ LOCK TABLES `RD_LIST` WRITE;
 
 INSERT INTO `RD_LIST` (`id`, `name`, `author`, `score`)
 VALUES
-	(4,'哈利·波特','J.K.罗琳',5);
+	(4,'Harrry.Potter','J.K.Rolin',5);
 
 /*!40000 ALTER TABLE `RD_LIST` ENABLE KEYS */;
 UNLOCK TABLES;
