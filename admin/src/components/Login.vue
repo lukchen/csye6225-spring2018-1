@@ -120,7 +120,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-   
+    .navbar-brand{
+        font-size:2em;
+    }
     .form{
         width:40%;
         margin: 10em auto;

@@ -1,7 +1,7 @@
 <template>
     <div class="editor">
         <input type="text" class="title" id="title" v-model="title" @input="autoSave">
-        <div class="operate-bar" v-show="id && $route.path === '/lists'">
+        <div class="operate-bar" v-show="id && $route.path === '/'">
             <section class="tag-container">
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-huiyuanbiaoqian"></use>
@@ -29,7 +29,9 @@
 <script>
 /**
  * @author {chen.zena@husky.neu.edu}
- * @file SimpleMDE组件
+ *         {jia.xi@huaksy.neu.edu}
+ *         {qiu.che@husky.neu.edu}
+ * @file SimpleMDE, a editor
  * */
 import 'font-awesome/css/font-awesome.min.css'
 import 'simplemde/dist/simplemde.min.css'
