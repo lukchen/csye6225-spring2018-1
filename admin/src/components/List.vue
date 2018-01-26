@@ -24,13 +24,13 @@
  *         {qiu.che@husky.neu.edu}
  * @file welcom page
  * */
-import ArticleList from '@/components/common/ArticleList'
-import Editor from '@/components/common/Editor'
+
+//import Editor from '@/components/common/Editor'
 
 export default {
     components: {
-        Editor,
-        ArticleList
+        
+       
     },
     methods: {
         postArticle() {
@@ -61,7 +61,8 @@ export default {
 
 <style lang="scss" scoped>
     .jumbotron{
-        margin-top: 7em;
+        width:70%;
+        margin:10em auto;
         background-color: rgba(255, 255, 255, 0.8)
     }
 

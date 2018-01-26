@@ -4,7 +4,7 @@
             <h1 class="navbar-brand">CSYE6225 Assignment2</h1> 
 
             <div class="collapse navbar-collapse" id="navbarColor01">
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav">
                       
                       <li class="nav-item">
                             <section>
@@ -52,8 +52,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .navbar-brand{
+        font-size:2em;
+    }
     #navbarColor01{
         color:white;
+        margin-left: 30%;
+        font-size: 1.5em;
     }
     .icon{
         color: white;

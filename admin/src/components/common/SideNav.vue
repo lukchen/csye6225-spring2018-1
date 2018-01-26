@@ -6,21 +6,21 @@
                     <svg class="icon" aria-hidden="true">
                                 <use xlink:href="#icon-quanbu"></use>
                     </svg>
-                    <p class="descript">Lists</p>
+                    <p class="descript">Vuejs</p>
                 </a>
 
                 <a href="#" class="list-group-item list-group-item-action">
                     <svg class="icon" aria-hidden="true">
                                 <use xlink:href="#icon-huiyuanbiaoqian"></use>
                     </svg>
-                    <p class="descript">Tags</p>
+                    <p class="descript">Nodejs</p>
                 </a>
 
                 <a href="#" class="list-group-item list-group-item-action">
                     <svg class="icon" aria-hidden="true">
                                 <use xlink:href="#icon-zaixianzhidao"></use>
                     </svg>
-                    <p class="descript">Reading</p>
+                    <p class="descript">MySQL</p>
                 </a>
                     
         </div>
