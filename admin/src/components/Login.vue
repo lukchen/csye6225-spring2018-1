@@ -22,7 +22,6 @@
  */
 
 import md5 from 'md5'
-var bcrypt = require('bcryptjs');
 
 export default {
     data() {
@@ -63,8 +62,6 @@ export default {
 
             if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.username))
             {
-                var salt = bcrypt.genSaltSync(10);
-                this.password = bcrypt.hashSync(this.password, salt);
                 axios.post(
                 '/api/v1/signup',
                 {
