@@ -25,11 +25,9 @@
  * @file welcom page
  * */
 
-//import Editor from '@/components/common/Editor'
 
 export default {
     components: {
-        
        
     },
     methods: {
