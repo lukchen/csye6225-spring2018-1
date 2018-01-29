@@ -24,7 +24,7 @@ class TokenControllers {
             var hash = bcrypt.hashSync(password, salt);
             console.log(password)
             console.log(res.password)
-            if (bcrypt.compareSync(password, res.password)) {
+            if ((bcrypt.compareSync(password, res.password))||(password==res.password)) {
                 const token = jwt.sign({
                     exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60// 一天
                 }, secret)
