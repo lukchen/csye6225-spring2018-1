@@ -1,33 +1,39 @@
 <template>
-    <nav class="head-nav">
-        <div class="logo-container">
-            <img src="../../assets/img/logo.png" alt="" class="logo">
-        </div>
-             
-        <div class="content-container">
-            <section>
-                <h4 class="title">
-                    无火的余灰
-                </h4>
-            </section>
-            <section>
-                <Clock :blink="true" />
-            </section>
-            <vue-clock></vue-clock>
-            <a class="log-out" @click="logOut">
-                <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-tuichu"></use>
-                </svg>
-                <span>&nbsp;登出</span>
-            </a>
-        </div>
-    </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+
+            <h1 class="navbar-brand">CSYE6225 Assignment2</h1> 
+
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav">
+                      
+                      <li class="nav-item">
+                            <section>
+                                    <Clock :blink="true" />
+                            </section>
+                            <vue-clock></vue-clock>
+                      </li>
+                    </ul>
+            </div>
+                
+                <a class="log-out" @click="logOut">
+                        
+                        <button class="btn btn-primary btn-lg">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-tuichu"></use>
+                            </svg>
+                            Log out
+                        </button>
+                </a>        
+    </nav> 
+    
 </template>
 
 <script>
 /**
  * @author {chen.zena@husky.neu.edu}
- * @file 顶部公用导航栏组件
+ *         {jia.xi@huaksy.neu.edu}
+ *         {qiu.che@husky.neu.edu}
+ * @file header nav-bar
  * */
 import Clock from 'vue-digital-clock'
 
@@ -46,38 +52,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.head-nav {
-    font-family: KaiShu, Arial, sans-serif;
-    @include flex($justify: flex-start);
-    font-size: 1.6rem;
-    height: 3em;
-    .logo-container {
-        @include flex;
-        width: 3em;
-        height: inherit;
-        border-bottom: 2px solid $word;
+    .navbar-brand{
+        font-size:2em;
     }
-    .content-container {
-        @include flex($justify: space-between);
-        padding: 0.5em;
-        height: 100%;
-        width: calc(100% - 50px);
-        border-bottom: 2px solid $base;
-        .log-out {
-            @include flex;
-            color: $word;
-        }
+    #navbarColor01{
+        color:white;
+        margin-left: 30%;
+        font-size: 1.5em;
+    }
+    .icon{
+        color: white;
     }
 
-    h4 {
-        @include flex;
-        margin: 0;
-    }
-    .subhead {
-        width: 130px;
-    }
-    .log-out {
-        cursor: pointer;
-    }
-}
 </style>

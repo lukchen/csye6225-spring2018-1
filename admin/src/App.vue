@@ -4,14 +4,16 @@
             <header-nav></header-nav>
             <side-nav></side-nav>
         </template>
-        <router-view/>
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
 /**
  * @author {chen.zena@husky.neu.edu}
- * @file admin端根组件
+ *         {jia.xi@huaksy.neu.edu}
+ *         {qiu.che@husky.neu.edu}
+ * @file admin
  */
 
 import HeaderNav from '@/components/common/HeaderNav'
@@ -21,7 +23,6 @@ export default {
     name: 'app',
     data() {
         return {
-            // 必须为其设置初始值，防止开始的时候渲染
             isLogin: true
         }
     },
@@ -31,12 +32,13 @@ export default {
     },
     watch: {
         $route(val) {
-            this.isLogin = val.path === '/login'
+            this.isLogin = val.path === '/'
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+  
 
 </style>

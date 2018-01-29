@@ -9,12 +9,13 @@
 
 html {
     font: {
-        size: 62.5%;
+        
         family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
         weight: 400;
     }
     color: $word;
     height: 100%;
+    
 }
 
 body {
@@ -26,6 +27,7 @@ body {
 
 body * {
     box-sizing: border-box;
+    
 }
 
 h3, h4, h5, h6 {
@@ -42,7 +44,7 @@ a {
 
 .main {
     margin-left: 48px;
-    background: $background;
+    
     padding: .5em 6em;
     height: calc(100% - 48px);
     h2 {
