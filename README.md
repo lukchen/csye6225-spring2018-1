@@ -7,7 +7,7 @@
 ## Sign up/ Sign in
 
   This project accomplised a website sign up/ sign in function, user's information will be store in database and password will be encrypted,
-  This web application is a seperation of back-end and front-end and use axios to send data, it basiclly contains three parts: server, client, admin.
+  This web application is a seperation of RESTful back-end and front-end and use axios to send data, it basiclly contains three parts: server, client, admin.
 
 ## Prerequisites
 
