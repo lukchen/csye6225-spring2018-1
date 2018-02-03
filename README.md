@@ -7,7 +7,7 @@
 ## Sign up/ Sign in
 
   This project accomplised a website sign up/ sign in function, user's information will be store in database and password will be encrypted,
-  This web application is a seperation of RESTful back-end and front-end and use axios to send data, it basiclly contains three parts: server, client, admin.
+  This web application is a seperation of back-end and front-end and use axios to send data, it basiclly contains three parts: server, client, admin.
 
 ## Prerequisites
 
@@ -51,6 +51,30 @@ Admin: application management, provides sign in/sign up modules, It is listening
 
 start admin as dev: npm run dev-admin
 
+## Install JMeter and JMeter plugins
+
+```
+$ python bin/JMeterInstaller.py
+```
+
+The installer will also install several JMeter Plugins, which can be used directly or within a continuous integration server such as Jenkins
+
+## Open Tests in JMeter
+
+```
+apache-jmeter-3.0/bin/jmeter.sh -t tests/my_test.jmx
+```
+
+This will load the JMeter GUI. This very simple test hits http://localhost 1 time, with 1 user
+
+- Run the tests with Command-R
+- See results by clicking in any of the Graph or Tree nodes
+- Stop tests with Command-period
+- Clear results with Command-E
+
+## Running Headless Tests
+
+Especially in a continuous integration server, you'll want to run JMeter tests "headlessly", i.e. without a graphical user interface.
 
 ## Contributing
 
