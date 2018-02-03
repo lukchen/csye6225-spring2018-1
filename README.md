@@ -72,10 +72,13 @@ This will load the JMeter GUI. This very simple test hits http://localhost 1 tim
 - Stop tests with Command-period
 - Clear results with Command-E
 
+- On Jmeter, open Signup with scv.jmx, which sets the csv config, the thread group nubmber and HTTP request, signup 100 users to website.
+- Then open Login with scv.jmx, which login use the 100 users registered on Signup with scv.jmx, to test the the web client/server structure.
+
 ## Running Headless Tests
 
 Especially in a continuous integration server, you'll want to run JMeter tests "headlessly", i.e. without a graphical user interface.
-
+x
 ## Contributing
 
 1. Fork it (<https://github.com/yourname/yourproject/fork>)
