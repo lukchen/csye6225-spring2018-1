@@ -1,7 +1,7 @@
 {
    "AWSTemplateFormatVersion" : "2010-09-09",
    "Resources" : {
-      "VPC": {
+      "STACK_NAME-csye6225-vpc": {
 			"Type": "AWS::EC2::VPC",
 			"Properties": {
 				"CidrBlock": "10.0.0.0/16",
@@ -14,7 +14,7 @@
 			}
 		},
 
-      "InternetGateway": {
+      "STACK_NAME-csye6225-InternetGateway": {
 			"Type": "AWS::EC2::InternetGateway",
 			"Properties": {
 				"Tags": [{
@@ -30,19 +30,19 @@
 			"Type": "AWS::EC2::VPCGatewayAttachment",
 			"Properties": {
 				"VpcId": {
-					"Ref": "VPC"
+					"Ref": "STACK_NAME-csye6225-vpc"
 				},
 				"InternetGatewayId": {
-					"Ref": "InternetGateway"
+					"Ref": "STACK_NAME-csye6225-InternetGateway"
 				}
 			}
 		},
 
-	  "RouteTable": {
+	  "STACK_NAME-csye6225-public-route-table": {
 	  			"Type": "AWS::EC2::RouteTable",
 	  			"Properties": {
 	  				"VpcId": {
-	  					"Ref": "VPC"
+	  					"Ref": "STACK_NAME-csye6225-vpc"
 	  				},
 	  				"Tags": [{
 	  					"Key": "Application",
@@ -53,16 +53,16 @@
 	  			}
 	  		},
 
-	"Route": {
+	"STACK_NAME-csye6225-public-route-table": {
 		"Type": "AWS::EC2::Route",
 		"DependsOn": "AttachGateway",
 		"Properties": {
 			"RouteTableId": {
-				"Ref": "RouteTable"
+				"Ref": "STACK_NAME-csye6225-public-route-table"
 			},
 			"DestinationCidrBlock": "0.0.0.0/0",
 			"GatewayId": {
-				"Ref": "InternetGateway"
+				"Ref": "STACK_NAME-csye6225-InternetGateway"
 			}
 		}
 	}
