@@ -1,0 +1,27 @@
+language: node_js
+node_js:
+  - "8"
+install:
+  - npm install    
+after_success:
+  -mkdir codedeploy
+  -zip -r project-${TRAVIS_JOB_NUMBER}.zip *
+deploy:
+  - provider: s3
+    access_key_id: AKIAI6HDU2DCC7S6375A
+    secret_access_key: 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
+    bucket: csye6225-xinglong
+    region: us-east-2
+    skip_cleanup: true
+    on:
+    all_branches: true
+notifications:
+
+  email:
+
+   recipients:
+     - jia.xi@husky.neu.edu
+
+    on_success: never # default: change
+    on_failure: always # default: always    
+  
