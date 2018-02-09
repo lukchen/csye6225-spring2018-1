@@ -18,7 +18,8 @@ deploy:
 notifications:
 
   email:
-   
+   recipients:
+     - jia.xi@husky.neu.edu
     on_success: never # default: change
     on_failure: always # default: always    
   
