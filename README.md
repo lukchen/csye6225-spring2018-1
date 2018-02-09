@@ -39,6 +39,7 @@ run 'npm install' first and run the follow lines in path '/csye6225-spring2018'
 
 Server: server side as RESTful architectural style, responsible for communication with client/admin side. Used JWT achieves authentication system. It is listening at http://localhost:3000/
 
+
 start server as dev: npm run dev-server   ## Attention, you must run server first, then run client or admin
 
 

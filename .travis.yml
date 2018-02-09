@@ -4,8 +4,7 @@ node_js:
 install:
   - npm install  
 script:
-  - npm run dev-server
-  - npm run dev-admin
+  - npm test
 after_success:
   -mkdir codedeploy
   -zip -r project-${TRAVIS_JOB_NUMBER}.zip *
