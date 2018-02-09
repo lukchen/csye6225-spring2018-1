@@ -5,6 +5,7 @@ install:
   - npm install  
 script:
   - npm run dev-server
+  
 after_success:
   -mkdir codedeploy
   -zip -r project-${TRAVIS_JOB_NUMBER}.zip *
