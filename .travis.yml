@@ -14,7 +14,7 @@ deploy:
     region: us-east-1
     skip_cleanup: true
     on:
-    branch: assginment4
+    all_branches: true
 notifications:
   email:
     recipients:
