@@ -8,17 +8,20 @@ after_success:
   -zip -r project-${TRAVIS_JOB_NUMBER}.zip *
 deploy:
   - provider: s3
-    access_key_id: AKIAI2DZ4SOAINEOXJ4A
-    secret_access_key: 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
-    bucket: csye6225-assignment4
-    region: us-east-1
+    access_key_id: AKIAI6HDU2DCC7S6375A
+    secret_access_key: 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
+    bucket: csye6225-xinglong
+    region: us-east-2
     skip_cleanup: true
     on:
     all_branches: true
 notifications:
+
   email:
-    recipients:
-      - chen.zena@husky.neu.edu
+
+   recipients:
+     - jia.xi@husky.neu.edu
+
     on_success: never # default: change
     on_failure: always # default: always    
   
