@@ -2,10 +2,7 @@ language: node_js
 node_js:
   - "8"
 install:
-  - npm install  
-script:
-  - npm run dev-server
-  
+  - npm install    
 after_success:
   -mkdir codedeploy
   -zip -r project-${TRAVIS_JOB_NUMBER}.zip *
