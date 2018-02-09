@@ -53,7 +53,7 @@
 	  			}
 	  		},
 
-	"csye6225publicroutetable": {
+	"csye6225route": {
 		"Type": "AWS::EC2::Route",
 		"DependsOn": "AttachGateway",
 		"Properties": {
