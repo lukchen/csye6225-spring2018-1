@@ -14,9 +14,9 @@
       "EC2" : {
          "Type" : "AWS::EC2::Instance",
          "Properties" : {
-            "ImageId" : "ami-41e0b93b",
+            "ImageId" : "ami-66506c1c",
             "InstanceType" : "t2.micro",
-            "DisableApiTermination" : "true"
+            "DisableApiTermination" : "false"
          }
       },
 
