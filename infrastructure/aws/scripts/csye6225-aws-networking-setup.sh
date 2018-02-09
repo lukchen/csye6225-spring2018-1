@@ -1,5 +1,4 @@
 #!/bin/bash
-#author: jia.xi@husky.neu.edu
 
 
 

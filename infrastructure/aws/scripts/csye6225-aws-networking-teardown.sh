@@ -1,5 +1,5 @@
 #!/bin/bash
-#author jia.xi@husky.neu.edu
+
 
 echo Deleting vpc, below is the Vpcs:
 aws ec2 describe-vpcs --query 'Vpcs[*].{VpcId:VpcId,Default:IsDefault}' 
