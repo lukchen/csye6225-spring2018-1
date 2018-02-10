@@ -20,7 +20,6 @@ notifications:
   email:
 
    recipients:
-     - chen.zena@husky.neu.edu
     on_success: never # default: change
     on_failure: always # default: always    
   
