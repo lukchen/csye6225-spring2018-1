@@ -12,12 +12,19 @@
    "Resources" : {
 
       "EC2" : {
+
          "Type" : "AWS::EC2::Instance",
          "Properties" : {
             "ImageId" : "ami-66506c1c",
             "InstanceType" : "t2.micro",
-            "DisableApiTermination" : "false"
-         }
+            "DisableApiTermination" : "true",
+            "Tags" : [
+               {
+                 "Key" : "Name",
+                 "Value" : "MyTag"
+               },  
+            ]
+         },
       },
 
       "Volume" : {
