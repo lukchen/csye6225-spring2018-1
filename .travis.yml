@@ -16,10 +16,9 @@ deploy:
     on:
     all_branches: true
 notifications:
-
   email:
-
-   recipients:
+    recipients:
+      - chen.zena@husky.neu.edu
     on_success: never # default: change
-    on_failure: always # default: always    
+    on_failure: always # default: always   
   
