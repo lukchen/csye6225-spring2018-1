@@ -24,7 +24,7 @@
          "Type":"AWS::EC2::Volume",
          "Properties" : {
             "Size" : 16,
-            "Encrypted" : "false",
+            "Encrypted" : "true",
             "VolumeType" : "gp2",
             "AvailabilityZone" : { "Fn::GetAtt" : [ "EC2", "AvailabilityZone" ] },
          }
