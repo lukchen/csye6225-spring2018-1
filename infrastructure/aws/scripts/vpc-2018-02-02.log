@@ -1,0 +1,68 @@
+VPC	10.0.0.0/16	dopt-e0d20098	default	False	pending	vpc-0235d779
+CIDRBLOCKASSOCIATIONSET	vpc-cidr-assoc-2ec92543	10.0.0.0/16
+CIDRBLOCKSTATE	associated
+INTERNETGATEWAY	igw-a33322da
+{
+    "Vpc": {
+        "VpcId": "vpc-6630d21d", 
+        "InstanceTenancy": "default", 
+        "Tags": [], 
+        "CidrBlockAssociationSet": [
+            {
+                "AssociationId": "vpc-cidr-assoc-9ddc30f0", 
+                "CidrBlock": "10.0.0.0/16", 
+                "CidrBlockState": {
+                    "State": "associated"
+                }
+            }
+        ], 
+        "Ipv6CidrBlockAssociationSet": [], 
+        "State": "pending", 
+        "DhcpOptionsId": "dopt-e0d20098", 
+        "CidrBlock": "10.0.0.0/16", 
+        "IsDefault": false
+    }
+}
+{
+    "InternetGateway": {
+        "Tags": [], 
+        "Attachments": [], 
+        "InternetGatewayId": "igw-d53223ac"
+    }
+}
+{
+    "RouteTable": {
+        "Associations": [], 
+        "RouteTableId": "rtb-8e5955f3", 
+        "VpcId": "vpc-6630d21d", 
+        "PropagatingVgws": [], 
+        "Tags": [], 
+        "Routes": [
+            {
+                "GatewayId": "local", 
+                "DestinationCidrBlock": "10.0.0.0/16", 
+                "State": "active", 
+                "Origin": "CreateRouteTable"
+            }
+        ]
+    }
+}
+{
+    "Return": true
+}
+{
+    "InternetGateway": {
+        "Tags": [], 
+        "Attachments": [], 
+        "InternetGatewayId": "igw-8d3322f4"
+    }
+}
+
+
+{
+    "InternetGateway": {
+        "Tags": [], 
+        "Attachments": [], 
+        "InternetGatewayId": "igw-bf3021c6"
+    }
+}
