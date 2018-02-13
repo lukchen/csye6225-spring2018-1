@@ -4,12 +4,12 @@ node_js:
 install:
   - npm install    
 after_success:
-  -mkdir codedeploy
-  -zip -r project-${TRAVIS_JOB_NUMBER}.zip *
+  - mkdir codedeploy
+  - zip -r project-${TRAVIS_JOB_NUMBER}.zip *
 notifications:
   email:
-   recipients:
-    -chen.zena@husky.neu.edu
+    recipients:
+      - chen.zena@husky.neu.edu
     on_success: never # default: change
     on_failure: always # default: always   
   
