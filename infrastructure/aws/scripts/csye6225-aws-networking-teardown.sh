@@ -6,6 +6,9 @@ aws ec2 describe-vpcs --query 'Vpcs[*].{VpcId:VpcId,Default:IsDefault}'
 
 read -p "Please enter the VpcId you want to delete: " vpcId
 
+routeTable1=`aws ec2 describe-route-tables --filters "Name=vpc-id,Values=$vpcId" --query 'RouteTables[0].RouteTableId' --output text`
+routeTable2=`aws ec2 describe-route-tables --filters "Name=vpc-id,Values=$vpcId" --query 'RouteTables[1].RouteTableId' --output text`
+
 aws ec2 describe-route-tables 
 
 read -p "Please enter the RoutetableId you want to delete: " routeTable2
