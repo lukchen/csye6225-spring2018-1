@@ -1,16 +1,41 @@
 <template>
-    <div class="login-container">
-        <header class="login-head">
-        </header>
-        <section class="form">
-            <span class="slogan">Please Login!
-                <span>/ Login</span>
-            </span>
-            <input type="text" id="user" placeholder="Username" v-model="username">
-            <input type="password" id="password" placeholder="Password" v-model="password">
-            <button id="login" @click="login">Login</button>
-            <button id="sign up" @click="signup">Sign up</button>
-        </section>
+         
+
+    <div id="login">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+            <h1 class="navbar-brand">CSYE6225 Assignment2</h1>           
+        </nav> 
+
+        
+        <form class="form jumbotron">
+            <fieldset>
+
+                <div class="form-title"><h3>Please Login</h3></div>
+                
+
+                <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input class="form-control" aria-describedby="emailHelp" placeholder="Enter email as Username" type="email"
+                                id="user" v-model="username">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+
+                <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input class="form-control"  placeholder="Password" type="password"
+                                id="password" v-model="password">
+                </div>
+                
+                <div class="form-button">
+                        <button type="button" class="btn btn-secondary" id="login" @click="login">Login</button>
+                        <button type="button" class="btn btn-secondary" id="sign up" @click="signup">Sign up</button>
+                </div>
+
+            </fieldset>
+
+        </form>
+
+        
         <footer></footer>
     </div>
 </template>
@@ -18,11 +43,12 @@
 <script>
 /**
  * @author {chen.zena@husky.neu.edu}
- * @file admin端登录页
+ *         {jia.xi@huaksy.neu.edu}
+ *         {qiu.che@husky.neu.edu}
+ * @file admin--login/sign up
  */
 
 import md5 from 'md5'
-var bcrypt = require('bcryptjs');
 
 export default {
     data() {
@@ -47,7 +73,7 @@ export default {
                 .then(res => {
                     const data = res.data
                     localStorage.setItem('ashenToken', data)
-                    this.$router.push('/lists')
+                    this.$router.push('/welcome')
                 })
                 .catch(err => {
                     const errorMsg = err.response.data.error
@@ -63,8 +89,7 @@ export default {
 
             if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.username))
             {
-                var salt = bcrypt.genSaltSync(10);
-                this.password = bcrypt.hashSync(this.password, salt);
+                
                 axios.post(
                 '/api/v1/signup',
                 {
@@ -93,65 +118,26 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-.login-container {
-    height: 100%;
-    @include flex($flow: column wrap);
-    font-family: "KaiShu", "Dosis", "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
-    .login-head {
-        @include flex;
-        width: 100%;
-        height: 3em;
-        font-size: 2rem;
+    .navbar-brand{
+        font-size:2em;
     }
+    .form{
+        width:40%;
+        margin: 10em auto;
+        background-color: rgba(255, 255, 255,0.8);
+    }
+    .form legend{
+        text-align: center;
+    }
+    .form-title{
+        text-align: center;
+        margin-bottom: 3em;
+    }
+    .form-button{
+        text-align: center;
+        margin-top: 4em;
+    }
+   
 
-    .form {
-        @include flex($flow: column wrap);
-        width: 400px;
-        height: 250px;
-        border-top: 20px solid $base;
-        border-radius: 5px;
-        // box-shadow: 4px 4px 5px -3px rgba(0, 0, 0, .3);
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
-        .slogan {
-            font-size: 1.6rem;
-            margin-bottom: 1em;
-            //color: $quote;
-            span {
-                color: $base;
-            }
-        }
-        input {
-            font: {
-                size: 1rem;
-                family: Dosis, Arial, sans-serif;
-            }
-            margin-bottom: 2em;
-            width: 20em;
-            height: 2.5em;
-            outline-color: $base;
-            border-radius: 3px;
-            border: 1px solid #ccc;
-        }
-        button {
-            color: $white;
-            font: {
-                size: 1.6rem;
-                family: KaiShu, Arial, sans-serif;
-            }
-            width: 6em;
-            height: 2em;
-            border: none;
-            background: $base;
-            outline: none;
-            cursor: pointer;
-        }
-    }
-
-    footer {
-        height: 4em;
-        @include flex;
-        justify-self: flex-end;
-    }
-}
 </style>
 

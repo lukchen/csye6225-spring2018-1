@@ -24,23 +24,23 @@ class TokenControllers {
             var hash = bcrypt.hashSync(password, salt);
             console.log(password)
             console.log(res.password)
-            if (bcrypt.compareSync(password, res.password)) {
+            if ((bcrypt.compareSync(password, res.password))||(password==res.password)) {
                 const token = jwt.sign({
                     exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60// 一天
                 }, secret)
                 ctx.body = token
             }
             else {
-                ctx.throw(401, '密码错误')
+                ctx.throw(401, 'Wrong password! Please try again...')
             }
         }
         else {
-            ctx.throw(401, '用户名错误')
+            ctx.throw(401, 'Wrong username! Please try again...')
         }
     }
 
     checkToken(ctx) {
-        ctx.body = '验证通过'
+        ctx.body = 'Congratulation! Welcome...'
     }
 }
 

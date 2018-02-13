@@ -1,6 +1,8 @@
 /**
  * @author {chen.zena@husky.neu.edu}
- * @file client端入口文件
+ *          {jia.xi@huaksy.neu.edu}
+ *         {qiu.che@husky.neu.edu}
+ * @file client port setting
  */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
