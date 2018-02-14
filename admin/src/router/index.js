@@ -1,29 +1,42 @@
 /**
  * @author {chen.zena@husky.neu.edu}
- *         {jia.xi@huaksy.neu.edu}
- *         {qiu.che@husky.neu.edu}
- * @file admin-routerlink
+ * @file admin端路由文件
  */
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
 import List from '@/components/List'
-
+import Tag from '@/components/Tag'
+import ReadingList from '@/components/ReadingList'
+import About from '@/components/About'
 
 Vue.use(Router)
 
 const router = new Router({
-    routes: [
-        {
-            path: '/',
+    routes: [{
+            path: '/login',
             component: Login
         },
         {
-            path: '/welcome',
+            path: '/lists',
             component: List
         },
-       
-        
+        {
+            path: '/tags',
+            component: Tag
+        },
+        {
+            path: '/readinglists',
+            component: ReadingList
+        },
+        {
+            path: '/about',
+            component: About
+        },
+        {
+            path: '*',
+            redirect: '/login'
+        }
     ]
 })
 
@@ -38,9 +51,9 @@ router.beforeEach((to, from, next) => {
                 })
             .then(res => {
                 // token验证通过
-                const pathArr = ['/welcome','/']
+                const pathArr = ['/lists', '/tags', '/readinglists', '/about']
                 if (pathArr.indexOf(to.path) === -1) {
-                    next('welcome')
+                    next('lists')
                 }
                 else {
                     next()
@@ -48,8 +61,8 @@ router.beforeEach((to, from, next) => {
             })
             .catch(err => {
                 // token验证不通过
-                if (to.path !== '/') {
-                    next('')
+                if (to.path !== '/login') {
+                    next('login')
                 }
                 else {
                     next()
@@ -57,8 +70,8 @@ router.beforeEach((to, from, next) => {
             })
     }
     else {
-        if (to.path !== '/') {
-            next('')
+        if (to.path !== '/login') {
+            next('login')
         }
         else {
             next()
