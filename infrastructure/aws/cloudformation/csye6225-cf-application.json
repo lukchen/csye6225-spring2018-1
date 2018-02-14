@@ -6,7 +6,30 @@
     "STACKNAME": {
       "Description" : "Name of an existing EC2 KeyPair to enable SSH access to the instance",
       "Type": "String",
-    }
+    },
+
+    "ImageId" : {
+      "Type" : "String",
+      "Default" : "ami-66506c1c",
+    },
+
+    "InstanceType" : {
+      "Type" : "String",
+      "Default" : "t2.micro",
+      "AllowedValues" : ["t2.micro", "m1.small", "m1.large"],
+      "Description" : "Enter t2.micro, m1.small, or m1.large. Default is t2.micro."
+    },
+
+    "Size" : {
+      "Type" : "Number",
+      "Default" : "16",
+    },
+
+    "VolumeType" : {
+      "Type" : "String",
+      "Default" : "gp2",
+    },
+
    },
 
    "Resources" : {
@@ -15,8 +38,8 @@
 
          "Type" : "AWS::EC2::Instance",
          "Properties" : {
-            "ImageId" : "ami-66506c1c",
-            "InstanceType" : "t2.micro",
+            "ImageId" : { "Ref" : "ImageId" },
+            "InstanceType" : { "Ref" : "InstanceType" },
             "DisableApiTermination" : "true",
             "Tags" : [
                {
@@ -30,9 +53,9 @@
       "Volume" : {
          "Type":"AWS::EC2::Volume",
          "Properties" : {
-            "Size" : 16,
+            "Size" : { "Ref" : "size" },
             "Encrypted" : "true",
-            "VolumeType" : "gp2",
+            "VolumeType" : { "Ref" : "VolumeType" },
             "AvailabilityZone" : { "Fn::GetAtt" : [ "EC2", "AvailabilityZone" ] },
          }
       }
