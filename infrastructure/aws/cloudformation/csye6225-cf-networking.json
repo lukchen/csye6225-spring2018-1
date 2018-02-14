@@ -5,27 +5,22 @@
 			"Type": "AWS::EC2::VPC",
 			"Properties": {
 				"CidrBlock": "10.0.0.0/16",
-				"Tags": [{
-					"Key": "Application",
-					"Value": {
-						"Ref": "AWS::StackId"
-					}
-				}]
+				"Tags" : [ 
+					{"Key" : "Name", "Value" : "STACK_NAME-csye6225-vpc"}, 
+					{"Key" : "Application", "Value" : {"Ref" : "AWS::StackId"}}
+			    ]
 			}
 		},
 
       "csye6225InternetGateway": {
 			"Type": "AWS::EC2::InternetGateway",
 			"Properties": {
-				"Tags": [{
-					"Key": "Application",
-					"Value": {
-						"Ref": "AWS::StackId"
-					}
-				}]
+				"Tags": [
+					{"Key" : "Name", "Value" : "STACK_NAME-csye6225-InternetGateway"},
+					{"Key": "Application","Value": {"Ref": "AWS::StackId"}}
+				]
 			}
 		},
-
 	  "AttachGateway": {
 			"Type": "AWS::EC2::VPCGatewayAttachment",
 			"Properties": {
@@ -44,12 +39,10 @@
 	  				"VpcId": {
 	  					"Ref": "csye6225vpc"
 	  				},
-	  				"Tags": [{
-	  					"Key": "Application",
-	  					"Value": {
-	  						"Ref": "AWS::StackId"
-	  					}
-	  				}]
+	  				"Tags": [
+	  					{"Key" : "Name", "Value" : "STACK_NAME-csye6225-public-route-table"},
+	  					{"Key": "Application", "Value": {"Ref": "AWS::StackId"}}
+	  				]
 	  			}
 	  		},
 
