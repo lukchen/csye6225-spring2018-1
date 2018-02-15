@@ -1,19 +1,19 @@
 <template>
     <div class="tag-container main">
-        <h2>标签筛选 /
+        <h2>/
             <span>CHOOSE BY TAG</span>
         </h2>
         <hr>
         <main>
             <div class="tag-list">
                 <section class="tag">
-                    <h5>标签</h5>
+                    <h5>tag</h5>
                     <ul class="tags" @click="chooseTag($event)">
                         <li class="tag" :class="{chosen: chosenTags.indexOf(tag) > -1}" v-for="tag,index in tags" :key="tag">{{ tag }}</li>
                     </ul>
                 </section>
                 <section class="chosen-tag" v-show="chosenTags.length">
-                    <h5>修改标签</h5>
+                    <h5>edit tag</h5>
                     <ul class="tags">
                         <li class="tag-edit" v-for="tag,index in chosenTags">
                             <input type="text" :value="tag" @change="changeTag($event, index)" class="tag-input">

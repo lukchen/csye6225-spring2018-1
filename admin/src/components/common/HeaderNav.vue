@@ -7,7 +7,7 @@
         <div class="content-container">
             <section>
                 <h4 class="title">
-                    无火的余灰
+                    Profile
                 </h4>
             </section>
             <section>
@@ -18,7 +18,7 @@
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-tuichu"></use>
                 </svg>
-                <span>&nbsp;登出</span>
+                <span>&nbsp;log out</span>
             </a>
         </div>
     </nav>

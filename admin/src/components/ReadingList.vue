@@ -3,31 +3,31 @@
         <transition name="slide-fade">
             <div class="dialog-container" v-show="isDiaShow" @click="hideDialog($event)">
                 <section class="dialog">
-                    <h5>输入书籍</h5>
+                    <h5>type the book</h5>
                     <star :score="score" id="score" @choose-star="chooseScore"></star>
-                    <input type="text" id="name" placeholder="输入书籍名称...">
-                    <input type="text" id="author" placeholder="输入作者...">
+                    <input type="text" id="name" placeholder="type book name...">
+                    <input type="text" id="author" placeholder="type author name...">
                     <section class="btn-container">
-                        <button id="confirm" class="not-del" @click="confirmChange">确认</button>
-                        <button id="cancel" class="delete">取消</button>
+                        <button id="confirm" class="not-del" @click="confirmChange">confirm</button>
+                        <button id="cancel" class="delete">cancel</button>
                     </section>
                 </section>
             </div>
         </transition>
-        <h2>阅读列表 /
+        <h2>/
             <span>READING LIST</span>
         </h2>
         <hr>
         <main>
             <section class="btn-container">
-                <button id="add" class="not-del" @click="addBook">添加书籍</button>
+                <button id="add" class="not-del" @click="addBook">add book</button>
             </section>
             <table class="rd-list">
                 <tr>
-                    <th>书名</th>
-                    <th>作者</th>
-                    <th>评分</th>
-                    <th>编辑/删除</th>
+                    <th>book name</th>
+                    <th>author</th>
+                    <th>star</th>
+                    <th>edit/delete</th>
                 </tr>
                 <tr v-for="{ name, author, score },index in books">
                     <td class="col-1">{{ name }}</td>
@@ -37,8 +37,8 @@
                     </td>
                     <td class="col-4">
                         <section class="btn-container">
-                            <button id="edit" class="not-del" @click="editBook(index)">编辑</button>
-                            <button id="delete" class="delete" @click="deleteBook(index)">删除</button>
+                            <button id="edit" class="not-del" @click="editBook(index)">edit</button>
+                            <button id="delete" class="delete" @click="deleteBook(index)">delete</button>
                         </section>
                     </td>
                 </tr>

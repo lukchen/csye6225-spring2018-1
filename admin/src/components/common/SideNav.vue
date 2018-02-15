@@ -4,25 +4,31 @@
             <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-quanbu"></use>
             </svg>
-            <p class="descript">列表</p>
+            <p class="descript">list</p>
         </router-link>
         <router-link to="/tags" class="link">
             <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-huiyuanbiaoqian"></use>
             </svg>
-            <p class="descript">标签</p>
+            <p class="descript">tags</p>
         </router-link>
         <router-link to="/readinglists" class="link">
             <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-zaixianzhidao"></use>
             </svg>
-            <p class="descript">阅读</p>
+            <p class="descript">readings</p>
+        </router-link>
+        <router-link to="/picture" class="link">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-huiyuannan"></use>
+            </svg>
+            <p class="descript">picture</p>
         </router-link>
         <router-link to="/about" class="link">
             <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-huiyuannan"></use>
             </svg>
-            <p class="descript">朕</p>
+            <p class="descript">about me</p>
         </router-link>
     </aside>
 </template>

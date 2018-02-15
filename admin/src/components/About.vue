@@ -1,13 +1,13 @@
 <template>
     <div class="about-container main">
-        <h2>关于我 /
+        <h2> /
             <span>ABOUT ME</span>
         </h2>
         <hr>
         <main>
             <textarea></textarea>
             <section class="btn-container">
-                <button class="not-del" @click="updateAbout">提交修改</button>
+                <button class="not-del" @click="updateAbout">submit changes</button>
             </section>
         </main>
     </div>

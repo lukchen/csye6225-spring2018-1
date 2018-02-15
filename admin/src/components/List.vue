@@ -1,13 +1,13 @@
 <template>
     <div class="list-container main">
-        <h2>文章列表 /
+        <h2>article list /
             <span>ARTICLE LIST</span>
         </h2>
         <hr>
         <main>
             <div class="article-list">
                 <section class="btn-container">
-                    <button id="add" class="not-del" @click="postArticle">新文章</button>
+                    <button id="add" class="not-del" @click="postArticle">new article</button>
                 </section>
                 <article-list ref="articleList"></article-list>
             </div>

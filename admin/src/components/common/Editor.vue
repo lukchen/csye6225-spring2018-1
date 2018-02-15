@@ -15,8 +15,8 @@
                 <span class="tag-add" @click="toggleInput" v-else>+</span>
             </section>
             <section class="btn-container">
-                <button id="delete" class="delete" @click="deleteArticle">删除文章</button>
-                <button id="submit" class="not-del" @click="publishArticle">发布文章</button>
+                <button id="delete" class="delete" @click="deleteArticle">delete article</button>
+                <button id="submit" class="not-del" @click="publishArticle">publish article</button>
             </section>
         </div>
         <p class="tips" v-if="$route.path !== '/lists'">标签查询页面只能批量更改标签，修改的文章内容会自动保存。</p>

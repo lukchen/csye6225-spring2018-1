@@ -28,7 +28,7 @@ export default {
         axios.get('/api/v1/articles')
             .then(res => {
                 for (let article of res.data) {
-                    article.createTime = moment(article.createTime).format('YYYY年 MMM DD日 HH:mm:ss')
+                    article.createTime = moment(article.createTime).format('YYYY year MMM DD day HH:mm:ss')
                     article.isChosen = true
                 }
                 this.articleList.push(...res.data)
@@ -58,7 +58,7 @@ export default {
             axios.get(`/api/v1/articles/${updateId}`)
                 .then(res => {
                     const article = res.data[0]
-                    article.createTime = moment(article.createTime).format('YYYY年 MMM DD日 HH:mm:ss')
+                    article.createTime = moment(article.createTime).format('YYYY year MMM DD day HH:mm:ss')
                     article.isChosen = true
                     this.articleList.unshift(article)
                     this.activeIndex++

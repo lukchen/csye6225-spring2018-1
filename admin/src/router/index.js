@@ -8,6 +8,7 @@ import Login from '@/components/Login'
 import List from '@/components/List'
 import Tag from '@/components/Tag'
 import ReadingList from '@/components/ReadingList'
+import Picture from '@/components/Picture'
 import About from '@/components/About'
 
 Vue.use(Router)
@@ -28,6 +29,10 @@ const router = new Router({
         {
             path: '/readinglists',
             component: ReadingList
+        },
+        {
+            path: '/picture',
+            component: Picture
         },
         {
             path: '/about',
