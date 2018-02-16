@@ -44,6 +44,19 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
     console.log(to.path);
+
+    if(to.path=='/about'){
+        if(flag==1){
+            localStorage.removeItem('ashenToken')
+            console.log('aaaaaaaaaaaaaaaaaaaa')
+        }
+    }else{
+        if(flag>1){
+            localStorage.removeItem('ashenToken')
+            console.log('bbbbbbbbbbbbbbbbbbbb')
+            flag=0;
+        }
+    }
     // redirect会重新进行路由守卫，next()不会
     if (localStorage.ashenToken) {
         console.log('holy');
@@ -72,8 +85,7 @@ router.beforeEach((to, from, next) => {
                     next()
                 }
             })
-    }
-    else {
+    }else {
         console.log('damn');
         if(to.path!=='/about'){
             console.log('shit');
@@ -101,12 +113,18 @@ router.beforeEach((to, from, next) => {
                 const errorMsg = err.response.data.error
                 alert(errorMsg)
             })
+            
+            if(localStorage.ashenToken){
+                console.log('hhhhhhhhh')
+            }
 
         }
-
-        localStorage.removeItem('ashenToken')
-        localStorage.clear();
+        if(to.path!=='/login'){
+            flag+=1;
+        }
+        console.log(flag);
     }
+
 })
 
 export default router
