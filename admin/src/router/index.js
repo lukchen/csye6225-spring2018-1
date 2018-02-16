@@ -8,10 +8,11 @@ import Login from '@/components/Login'
 import List from '@/components/List'
 import Tag from '@/components/Tag'
 import ReadingList from '@/components/ReadingList'
-import Picture from '@/components/Picture'
 import About from '@/components/About'
 
 Vue.use(Router)
+
+var flag=0;
 
 const router = new Router({
     routes: [{
@@ -31,10 +32,6 @@ const router = new Router({
             component: ReadingList
         },
         {
-            path: '/picture',
-            component: Picture
-        },
-        {
             path: '/about',
             component: About
         },
@@ -46,8 +43,10 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+    console.log(to.path);
     // redirect会重新进行路由守卫，next()不会
     if (localStorage.ashenToken) {
+        console.log('holy');
         axios.get(
                 '/api/v1/tokens/check', {
                     headers: {
@@ -75,12 +74,38 @@ router.beforeEach((to, from, next) => {
             })
     }
     else {
-        if (to.path !== '/login') {
-            next('login')
+        console.log('damn');
+        if(to.path!=='/about'){
+            console.log('shit');
+            if (to.path !== '/login') {
+                
+                next('login')
+            }
+            else {
+                next()
+            }
+        }else{
+            console.log('fuck');
+            axios.post(
+            '/api/v1/tokens',
+            {
+                username: "abc@abc.abc",
+                password: "123"
+            })
+            .then(res => {
+                const data = res.data
+                localStorage.setItem('ashenToken', data)
+                next('/about')
+            })
+            .catch(err => {
+                const errorMsg = err.response.data.error
+                alert(errorMsg)
+            })
+
         }
-        else {
-            next()
-        }
+
+        localStorage.removeItem('ashenToken')
+        localStorage.clear();
     }
 })
 

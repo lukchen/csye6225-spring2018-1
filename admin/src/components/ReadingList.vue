@@ -1,49 +1,13 @@
 <template>
     <div class="reading-list-container main">
-        <transition name="slide-fade">
-            <div class="dialog-container" v-show="isDiaShow" @click="hideDialog($event)">
-                <section class="dialog">
-                    <h5>type the book</h5>
-                    <star :score="score" id="score" @choose-star="chooseScore"></star>
-                    <input type="text" id="name" placeholder="type book name...">
-                    <input type="text" id="author" placeholder="type author name...">
-                    <section class="btn-container">
-                        <button id="confirm" class="not-del" @click="confirmChange">confirm</button>
-                        <button id="cancel" class="delete">cancel</button>
-                    </section>
-                </section>
-            </div>
-        </transition>
-        <h2>/
-            <span>READING LIST</span>
-        </h2>
-        <hr>
-        <main>
-            <section class="btn-container">
-                <button id="add" class="not-del" @click="addBook">add book</button>
-            </section>
-            <table class="rd-list">
-                <tr>
-                    <th>book name</th>
-                    <th>author</th>
-                    <th>star</th>
-                    <th>edit/delete</th>
-                </tr>
-                <tr v-for="{ name, author, score },index in books">
-                    <td class="col-1">{{ name }}</td>
-                    <td class="col-2">{{ author }}</td>
-                    <td class="col-3">
-                        <star :score="score"></star>
-                    </td>
-                    <td class="col-4">
-                        <section class="btn-container">
-                            <button id="edit" class="not-del" @click="editBook(index)">edit</button>
-                            <button id="delete" class="delete" @click="deleteBook(index)">delete</button>
-                        </section>
-                    </td>
-                </tr>
-            </table>
-        </main>
+        <div v-if="!image">
+        <h2>Select an image</h2>
+        <input type="file" @change="onFileChange">
+        </div>
+        <div v-else>
+            <img id="avartar" :src="image" />
+            <button @click="removeImage">Remove image</button>
+        </div>
     </div>
 </template>
 
@@ -55,8 +19,12 @@
 import Star from '@/components/common/Star'
 
 export default {
+
     data() {
         return {
+            image: '',
+            message: '',
+
             books: [],
             isDiaShow: false,
             isEditing: false,
@@ -74,8 +42,57 @@ export default {
                 this.books = res.data
             })
             .catch(err => alert(err))
+        axios.get('/api/v1/image')
+            .then(res => {
+                if(res.data=="you dont have picture yet"){
+                    alert("you dont have picture yet");
+                }else{
+                    this.image = res.data
+                }
+            })
+            .catch(err => alert(err))    
     },
     methods: {
+
+        onFileChange(e) {
+          var files = e.target.files || e.dataTransfer.files;
+          if (!files.length)
+            return;
+          this.createImage(files[0]);
+        },
+        createImage(file) {
+          var image = new Image();
+          var reader = new FileReader();
+          var vm = this;
+
+          reader.onload = (e) => {            
+            vm.image = e.target.result;
+            axios.put('/api/v1/image', vm.image)
+            .then(res => {
+                this.message = res.data
+                if(this.message=="This username already exists!"){
+                    alert('This username already exists!')
+                }else if(this.message=="Sign up successfull!"){
+                    alert('Sign up successfull!')
+                }
+            })
+            .catch(err => alert(err));
+
+          };
+          reader.readAsDataURL(file);
+        },
+        removeImage: function (e) {
+          this.image = '';
+          axios.delete('/api/v1/image')
+            .then(res => {
+                this.message = res.data
+                if(this.message=="delete successfully!"){
+                    alert('delete successfully!')
+                }
+            })
+            .catch(err => alert(err));
+        },
+
         addBook() {
             this.isDiaShow = true
             this.isEditing = false
@@ -276,5 +293,15 @@ main {
 .slide-fade-leave-to {
     transform: translateY(-900px);
     opacity: 0;
+}
+
+img {
+  width: 30%;
+  margin: auto;
+  display: block;
+  margin-bottom: 10px;
+}
+button {
+  
 }
 </style>

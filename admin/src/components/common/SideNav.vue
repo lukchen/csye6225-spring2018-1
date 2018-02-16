@@ -18,12 +18,6 @@
             </svg>
             <p class="descript">readings</p>
         </router-link>
-        <router-link to="/picture" class="link">
-            <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-huiyuannan"></use>
-            </svg>
-            <p class="descript">picture</p>
-        </router-link>
         <router-link to="/about" class="link">
             <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-huiyuannan"></use>
