@@ -1,15 +1,45 @@
-language: node_js
-node_js:
-  - "8"
-install:
-  - npm install    
+language: java
+jdk:
+  - oraclejdk8
+
+sudo: false
+install: true
+
+branches:
+  only:
+  - $branch
+
+script:
+  - pwd
+  - cd webapp
+  - ./gradlew war
+  - cd ..
+  - pwd
+  - ls -al
+
 after_success:
-  - mkdir codedeploy
-  - zip -r project-${TRAVIS_JOB_NUMBER}.zip *
-notifications:
-  email:
-    recipients:
-      - jia.xi@husky.neu.edu
-    on_success: never # default: change
-    on_failure: always # default: always   
-  
+  - pwd
+  - ls -sl
+  - mkdir codedeploy_artifact
+  - zip -r csye6225-web-app-$TRAVIS_JOB_NUMBER.zip webapp/build/libs/ROOT.war infrastructure/aws/codedeploy
+  - ls -al
+  - mv csye6225-web-app-$TRAVIS_JOB_NUMBER.zip codedeploy_artifact/
+  - ls -al
+  - pwd
+  - cd codedeploy_artifact
+  - ls -al
+  - pwd
+  - cd ..
+  - pwd
+  - ls -al
+
+deploy:
+  - provider: s3
+    local_dir: codedeploy_artifact
+    bucket: $s3_bucket
+    region: us-east-1
+    skip_cleanup: true
+    access_key_id: $access_key_id
+    secret_access_key: $secret_access_key
+    on:
+      branch: $branch
