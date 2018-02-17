@@ -5,6 +5,10 @@
 			"Type": "AWS::EC2::VPC",
 			"Properties": {
 				"CidrBlock": "10.0.0.0/16",
+				"CidrBlock": "10.0.0.0/16",
+                "EnableDnsSupport": "true",
+                "EnableDnsHostnames": "true",
+                "InstanceTenancy": "default",
 				"Tags" : [ 
 					{"Key" : "Name", "Value" : "STACK_NAME-csye6225-vpc"}, 
 					{"Key" : "Application", "Value" : {"Ref" : "AWS::StackId"}}
@@ -94,6 +98,65 @@
 	            "RouteTableId" : { "Ref" : "csye6225privateroutetable" }
         	}
       	},
+
+
+      	"ec2SG": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "csye6225vpc"
+                },
+                "GroupName": "csye6225-webapp",
+                "GroupDescription": "ec2 SecurityGroup",
+                "SecurityGroupIngress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "80",
+                        "ToPort": "80",
+                        "CidrIp": "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "22",
+                        "ToPort": "22",
+                        "CidrIp": "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "443",
+                        "ToPort": "443",
+                        "CidrIp": "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "3306",
+                        "ToPort": "3306",
+                        "CidrIp": "0.0.0.0/0"
+                    }
+                ]
+            }
+        },
+
+        "RDSSG": {
+            "Type": "AWS::RDS::DBSecurityGroup",
+            "Properties": {
+                "EC2VpcId": {
+                    "Ref": "csye6225vpc"
+                },
+                "GroupDescription": "DB SecurityGroup",
+                "DBSecurityGroupIngress": [
+                    {
+                        "EC2SecurityGroupId": {
+                            "Ref": "ec2SG"
+                        }
+                    }
+                ],
+                "Tags": [{
+                    "Key": "Name",
+                    "Value": "csye6225-rds"
+                }]
+            }
+        },
 
 		"csye6225route": {
 			"Type": "AWS::EC2::Route",
