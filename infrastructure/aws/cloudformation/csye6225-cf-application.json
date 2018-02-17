@@ -86,7 +86,7 @@
       "RecordServiceS3Bucket" : {
         "Type" : "AWS::S3::Bucket",
          "Properties" : {
-           "BucketName" : "s3.csye6225-spring2018-qiuche.me"
+           "BucketName" : "s3.csye6225-spring2018-zenan.me"
         }
       },
 
