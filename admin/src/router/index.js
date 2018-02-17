@@ -1,35 +1,65 @@
 /**
  * @author {chen.zena@husky.neu.edu}
- *         {jia.xi@huaksy.neu.edu}
- *         {qiu.che@husky.neu.edu}
- * @file admin-routerlink
+ * @file admin端路由文件
  */
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
 import List from '@/components/List'
-
+import Tag from '@/components/Tag'
+import ReadingList from '@/components/ReadingList'
+import About from '@/components/About'
 
 Vue.use(Router)
 
+var flag=0;
+
 const router = new Router({
-    routes: [
-        {
-            path: '/',
+    routes: [{
+            path: '/login',
             component: Login
         },
         {
-            path: '/welcome',
+            path: '/lists',
             component: List
         },
-       
-        
+        {
+            path: '/tags',
+            component: Tag
+        },
+        {
+            path: '/readinglists',
+            component: ReadingList
+        },
+        {
+            path: '/about',
+            component: About
+        },
+        {
+            path: '*',
+            redirect: '/login'
+        }
     ]
 })
 
 router.beforeEach((to, from, next) => {
+    console.log(to.path);
+
+    if(to.path=='/about'){
+        if(flag==1){
+            localStorage.removeItem('ashenToken')
+            console.log('aaaaaaaaaaaaaaaaaaaa')
+        }
+    }else{
+        if(flag>1){
+            localStorage.removeItem('ashenToken')
+            console.log('bbbbbbbbbbbbbbbbbbbb')
+            flag=0;
+        }
+    }
     // redirect会重新进行路由守卫，next()不会
     if (localStorage.ashenToken) {
+        console.log('holy');
         axios.get(
                 '/api/v1/tokens/check', {
                     headers: {
@@ -38,9 +68,9 @@ router.beforeEach((to, from, next) => {
                 })
             .then(res => {
                 // token验证通过
-                const pathArr = ['/welcome','/']
+                const pathArr = ['/lists', '/tags', '/readinglists', '/about']
                 if (pathArr.indexOf(to.path) === -1) {
-                    next('welcome')
+                    next('lists')
                 }
                 else {
                     next()
@@ -48,22 +78,53 @@ router.beforeEach((to, from, next) => {
             })
             .catch(err => {
                 // token验证不通过
-                if (to.path !== '/') {
-                    next('')
+                if (to.path !== '/login') {
+                    next('login')
                 }
                 else {
                     next()
                 }
             })
-    }
-    else {
-        if (to.path !== '/') {
-            next('')
+    }else {
+        console.log('damn');
+        if(to.path!=='/about'){
+            console.log('shit');
+            if (to.path !== '/login') {
+                
+                next('login')
+            }
+            else {
+                next()
+            }
+        }else{
+            console.log('fuck');
+            axios.post(
+            '/api/v1/tokens',
+            {
+                username: "abc@abc.abc",
+                password: "123"
+            })
+            .then(res => {
+                const data = res.data
+                localStorage.setItem('ashenToken', data)
+                next('/about')
+            })
+            .catch(err => {
+                const errorMsg = err.response.data.error
+                alert(errorMsg)
+            })
+            
+            if(localStorage.ashenToken){
+                console.log('hhhhhhhhh')
+            }
+
         }
-        else {
-            next()
+        if(to.path!=='/login'){
+            flag+=1;
         }
+        console.log(flag);
     }
+
 })
 
 export default router
