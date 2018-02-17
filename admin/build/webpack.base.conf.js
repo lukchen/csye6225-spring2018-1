@@ -1,4 +1,5 @@
 'use strict'
+const fs = require('fs')
 const path = require('path')
 const utils = require('./utils')
 const config = require('../config/index')
