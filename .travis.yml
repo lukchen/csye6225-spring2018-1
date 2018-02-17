@@ -12,8 +12,8 @@ script:
   - pwd
   - ls
 after_success:
-  - mkdir codedeploy 
-  - zip -r csye6225-project-${TRAVIS_JOB_NUMBER}.zip * -x /node_modules /infrastructure
+  - mkdir codedeploy
+  - zip -r csye6225-project-${TRAVIS_JOB_NUMBER}.zip * -x node_modules/\*
   - mv csye6225-project-${TRAVIS_JOB_NUMBER}.zip codedeploy/
   - ls 
 
