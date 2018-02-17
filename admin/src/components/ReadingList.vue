@@ -1,13 +1,18 @@
 <template>
     <div class="reading-list-container main">
-        <div v-if="!image">
-        <h2>Select an image</h2>
+        <div >
+        <h1>Select an image</h1>
         <input type="file" @change="onFileChange">
         </div>
-        <div v-else>
-            <img id="avartar" :src="image" />
-            <button @click="removeImage">Remove image</button>
+        <div v-if="!image">
+        <img src=http://via.placeholder.com/350x250 />
         </div>
+        <div v-else>
+
+            <img id="avartar" :src="image" />
+         </div>   
+            <button @click="removeImage">Remove image</button>
+        
     </div>
 </template>
 
