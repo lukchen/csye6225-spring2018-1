@@ -1,0 +1,22 @@
+language: java
+jdk:
+  - oraclejdk8
+
+sudo: false
+install: true
+
+branches:
+  only:
+  - $branch
+
+
+
+script:
+  - pwd
+  - cd webapp
+  - ./gradlew war
+  - cd ..
+  - pwd
+  - ls -al
+
+
