@@ -6,7 +6,7 @@ install:
 
 branches:
   only:
-  - $branch 
+  - assignment6 
 
 after_success:
 
