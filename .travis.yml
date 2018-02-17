@@ -10,7 +10,7 @@ branches:
 
 script:
   - pwd
-  - ls -al
+  - ls
 after_success:
 
 notifications:
