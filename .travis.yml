@@ -18,9 +18,11 @@ after_success:
   - ls 
   - cd codedeploy
   - ls
+  - cd
 deploy:
   - provider: s3
     local_dir: codedeploy
+    bucket: $s3_bucket
     region: us-east-1
     skip_cleanup: true
     access_key_id: $access_key_id
