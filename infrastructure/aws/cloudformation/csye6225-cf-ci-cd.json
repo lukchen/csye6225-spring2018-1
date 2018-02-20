@@ -2,7 +2,7 @@
    "AWSTemplateFormatVersion": "2010-09-09",
 
    "Parameters" : {
-    
+
     "STACKNAME": {
       "Description" : "Name of an existing EC2 KeyPair to enable SSH access to the instance",
       "Type": "String",
@@ -11,6 +11,7 @@
    },
 
    "Resources": {
+
       "EC2Role": {
          "Type": "AWS::IAM::Role",
          "Properties": {
@@ -21,12 +22,15 @@
                   "Principal": {
                      "Service": [ "ec2.amazonaws.com" ]
                   },
-                  "Action": [ "sts:AssumeRole" ]
+                  "Action": "sts:AssumeRole"
                } ]
             },
-            "Path": "/"
+            "Path": "/",
+            "RoleName": "ec2Role"
          }
       },
+
+
       "EC2RolePolicies": {
          "Type": "AWS::IAM::Policy",
          "Properties": {
@@ -36,22 +40,45 @@
                "Statement": [ {
                   "Effect": "Allow",
                   "Action": "*",
-                  "Resource": "*"
+                  "Resource":  "*"
                } ]
             },
             "Roles": [ {
-               "Ref": "RootRole"
+               "Ref": "EC2Role"
             } ]
          }
       },
-      "RootInstanceProfile": {
+
+      "EC2Profile": {
          "Type": "AWS::IAM::InstanceProfile",
          "Properties": {
             "Path": "/",
-            "Roles": [ {
-               "Ref": "RootRole"
-            } ]
+            "Roles": [ { "Ref": "EC2Role" } ]
          }
+      },
+
+      "SampleBucketPolicy" : {
+        "Type" : "AWS::S3::BucketPolicy",
+        "Properties" : {
+          "Bucket" : "s3.csye6225-spring2018-zenan.me",
+          "PolicyDocument": {
+            "Statement":[{
+             "Action":"*",
+             "Effect":"Allow",
+             "Resource": { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "myExampleBucket" } , "/*" ]]},
+             "Principal":"*",
+              "Condition":{
+                "StringLike":{
+                  "aws:Referer":[
+                    "http://www.example.com/*",
+                    "http://example.com/*"
+                  ]
+                }
+              }
+            }]
+          }
+        }
       }
+      
    }
 }
