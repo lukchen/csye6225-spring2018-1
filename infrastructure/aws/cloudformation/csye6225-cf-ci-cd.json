@@ -57,7 +57,7 @@
          }
       },
 
-      "SampleBucketPolicy" : {
+      "BucketPolicy" : {
         "Type" : "AWS::S3::BucketPolicy",
         "Properties" : {
           "Bucket" : "s3.csye6225-spring2018-zenan.me",
@@ -65,16 +65,8 @@
             "Statement":[{
              "Action":"*",
              "Effect":"Allow",
-             "Resource": { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "myExampleBucket" } , "/*" ]]},
+             "Resource": { "Fn::Join" : ["", ["arn:aws:s3:::", "s3.csye6225-spring2018-zenan.me" , "/*" ]]},
              "Principal":"*",
-              "Condition":{
-                "StringLike":{
-                  "aws:Referer":[
-                    "http://www.example.com/*",
-                    "http://example.com/*"
-                  ]
-                }
-              }
             }]
           }
         }
