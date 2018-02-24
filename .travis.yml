@@ -1,7 +1,10 @@
 language: node_js
-node_js:
-  - "8"
-install:
+
+
+node_js: 
+  - 8
+install: 
+
   - npm install
 
 branches:
@@ -11,14 +14,22 @@ branches:
 script:
   - pwd
   - ls
+
+
 after_success:
   - mkdir codedeploy
-  - zip -r csye6225-project.zip * -x node_modules/\*
-  - mv csye6225-project-${TRAVIS_JOB_NUMBER}.zip codedeploy/
+  - zip -r csye6225-project-$TRAVIS_JOB_NUMBER.zip 
+  - ls
+  - mv csye6225-project-$TRAVIS_JOB_NUMBER.zip codedeploy/
+
   - ls 
   - cd codedeploy
   - ls
   - cd ..
+
+  
+
+
 deploy:
   - provider: s3
     local_dir: codedeploy
@@ -30,10 +41,11 @@ deploy:
     on:
       branch: assignment6
 
-notifications:
+
+notification:
+
   email:
     recipients:
-      - chen.zena@husky.neu.edu
-    on_success: never # default: change
-    on_failure: always # default: always   
-  
+      - jia.xi@husky.neu.edu
+    on_success: never
+    on_failure: always
