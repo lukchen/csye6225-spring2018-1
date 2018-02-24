@@ -8,3 +8,7 @@ files:
     destination: /home/ubuntu  
 
 hooks:
+  AfterInstall:
+    - location: infrastructure/aws/cloudformation/test.sh
+      runas: root
+      timeout: 300
