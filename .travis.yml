@@ -18,9 +18,9 @@ script:
 
 after_success:
   - mkdir codedeploy
-  - zip -r csye6225-project-$TRAVIS_JOB_NUMBER.zip 
+  - zip -r csye6225-project.zip * -x node_modules/\* 
   - ls
-  - mv csye6225-project-$TRAVIS_JOB_NUMBER.zip codedeploy/
+  - mv csye6225-project.zip codedeploy/
 
   - ls 
   - cd codedeploy
