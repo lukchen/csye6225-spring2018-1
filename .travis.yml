@@ -1,21 +1,25 @@
-language: node_js,
-node_js: 8,
+language: node_js
+node_js: 
+  - 8
 install: 
   - npm install
 
 branches:
   only:
   - assignment6 
+
 script:
   - pwd
   - ls
 
 after_success:
   - mkdir codedeploy
-  - zip -r csye6225-web-app-$TRAVIS_JOB_NUMBER.zip * -x node_modules/\*
+  - zip -r csye6225-project-$TRAVIS_JOB_NUMBER.zip * -x node_modules/\*
   - ls
-  - mv csye6225-web-app-$TRAVIS_JOB_NUMBER.zip codedeploy/
+  - mv csye6225-project-$TRAVIS_JOB_NUMBER.zip codedeploy/
   - ls 
+  - cd codedeploy
+  - ls
   - cd ..
   
 
