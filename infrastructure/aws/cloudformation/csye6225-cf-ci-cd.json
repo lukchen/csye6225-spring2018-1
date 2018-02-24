@@ -89,7 +89,7 @@
                     "codedeploy:GetApplicationRevision"
                   ],
                   "Resource": [
-                    "arn:aws:codedeploy:us-east-1:117941579736:application:ABCDE"
+                    "*"
                   ]
                 },
                 {
