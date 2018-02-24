@@ -3,63 +3,27 @@
 
    "Parameters" : {
 
-    "STACKNAME": {
-      "Description" : "Name of an existing EC2 KeyPair to enable SSH access to the instance",
-      "Type": "String",
-    }
-
-   },
-
-   "Resources": {
-
-    "Application" : {
-        "Type" : "AWS::CodeDeploy::Application",
-        "Properties" : {
-          "ApplicationName" : "ABCDE",
-        }
-    },
-
-    "DeploymentGroup" : {
-      "Type" : "AWS::CodeDeploy::DeploymentGroup",
-      "Properties" : {
-        "ApplicationName" : {"Ref" : "Application"},
-        "Deployment" : {
-          "Description" : "First time",
-          "IgnoreApplicationStopFailures" : "false",
-          "Revision" : {
-            "RevisionType" : "S3",
-            "S3Location" : {
-              "Bucket" : "code-deploy.csye6225-spring2018-zenan.me",
-              "Key" : "csye6225-project.zip",
-              "BundleType" : "Zip",
-            }
-          }
-        },
-        "Ec2TagFilters" : [{
-          "Key" : {"Ref" : "Name"},
-          "Value" : {"Ref" : "MyTag"},
-          "Type" : "KEY_AND_VALUE"
-        }],
-        "ServiceRoleArn" : "arn:aws:iam::117941579736:role/CodeDeployServiceRole"
+      "STACKNAME": {
+        "Description" : "Name of an existing EC2 KeyPair to enable SSH access to the instance",
+        "Type": "String",
       }
+
     },
 
-      "CodeDeployEC2ServiceRole": {
-         "Type": "AWS::IAM::Role",
-         "Properties": {
-            "AssumeRolePolicyDocument": {
-               "Version" : "2012-10-17",
-               "Statement": [ {
-                  "Effect": "Allow",
-                  "Principal": {
-                     "Service": [ "ec2.amazonaws.com" ]
-                  },
-                  "Action": "sts:AssumeRole"
-               } ]
-            },
-            "Path": "/",
-            "RoleName": "CodeDeployEC2ServiceRole"
-         }
+    "Resources": {
+
+      "Application" : {
+          "Type" : "AWS::CodeDeploy::Application",
+          "Properties" : {
+            "ApplicationName" : "ABCDE",
+          }
+      },
+
+      "codedeployBucket" : {
+        "Type" : "AWS::S3::Bucket",
+         "Properties" : {
+           "BucketName" : "code-deploy2.csye6225-spring2018-zenan.me"
+        }
       },
 
       "CodeDeployServiceRole": {
@@ -79,6 +43,74 @@
          }
       },
 
+      "TravisCodeDeploy": {
+        "Type": "AWS::IAM::Policy",
+        "Properties": {
+          "PolicyName": "Travis-Code-Deploy",
+          "PolicyDocument": {
+             "Version" : "2012-10-17",
+             "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "codedeploy:RegisterApplicationRevision",
+                  "codedeploy:GetApplicationRevision"
+                ],
+                "Resource": [
+                  "arn:aws:codedeploy:us-east-1:117941579736:application:ABCDE"
+                ]
+              },
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "codedeploy:CreateDeployment",
+                  "codedeploy:GetDeployment"
+                ],
+                "Resource": [
+                  "*"
+                ]
+              },
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "codedeploy:GetDeploymentConfig"
+                ],
+                "Resource": [
+                  "arn:aws:codedeploy:us-east-1:117941579736:deploymentconfig:CodeDeployDefault.OneAtATime",
+                  "arn:aws:codedeploy:us-east-1:117941579736:deploymentconfig:CodeDeployDefault.HalfAtATime",
+                  "arn:aws:codedeploy:us-east-1:117941579736:deploymentconfig:CodeDeployDefault.AllAtOnce"
+                ]
+              }
+            ]
+          },
+
+          "Roles": [ {
+             "Ref": "CodeDeployServiceRole"
+          } ],
+
+          "Groups" : [ "csye6225-spring2018-team" ]
+
+        }
+      },  
+
+      "CodeDeployEC2ServiceRole": {
+         "Type": "AWS::IAM::Role",
+         "Properties": {
+            "AssumeRolePolicyDocument": {
+               "Version" : "2012-10-17",
+               "Statement": [ {
+                  "Effect": "Allow",
+                  "Principal": {
+                     "Service": [ "ec2.amazonaws.com" ]
+                  },
+                  "Action": "sts:AssumeRole"
+               } ]
+            },
+            "Path": "/",
+            "RoleName": "CodeDeployEC2ServiceRole"
+         }
+      },
+
 
       "CodeDeployEC2S3": {
          "Type": "AWS::IAM::Policy",
@@ -88,12 +120,12 @@
               "Version" : "2012-10-17",
               "Statement": [
                 {
-                    "Action": [
-                        "s3:Get*",
-                        "s3:List*"
-                    ],
-                    "Effect": "Allow",
-                    "Resource": "*"
+                  "Action": [
+                      "s3:Get*",
+                      "s3:List*"
+                  ],
+                  "Effect": "Allow",
+                  "Resource": "*"
                 }
               ]
             },
@@ -103,66 +135,12 @@
          }
       },
 
-      "TravisCodeDeploy": {
-         "Type": "AWS::IAM::Policy",
-         "Properties": {
-            "PolicyName": "Travis-Code-Deploy",
-            "PolicyDocument": {
-               "Version" : "2012-10-17",
-               "Statement": [
-                {
-                  "Effect": "Allow",
-                  "Action": [
-                    "codedeploy:RegisterApplicationRevision",
-                    "codedeploy:GetApplicationRevision"
-                  ],
-                  "Resource": [
-                    "arn:aws:codedeploy:us-east-1:117941579736:application:ABCDE"
-                  ]
-                },
-                {
-                  "Effect": "Allow",
-                  "Action": [
-                    "codedeploy:CreateDeployment",
-                    "codedeploy:GetDeployment"
-                  ],
-                  "Resource": [
-                    "*"
-                  ]
-                },
-                {
-                  "Effect": "Allow",
-                  "Action": [
-                    "codedeploy:GetDeploymentConfig"
-                  ],
-                  "Resource": [
-                    "arn:aws:codedeploy:us-east-1:491833366348:deploymentconfig:CodeDeployDefault.OneAtATime",
-                    "arn:aws:codedeploy:us-east-1:491833366348:deploymentconfig:CodeDeployDefault.HalfAtATime",
-                    "arn:aws:codedeploy:us-east-1:491833366348:deploymentconfig:CodeDeployDefault.AllAtOnce"
-                  ]
-                }
-              ]
-            },
-            "Roles": [ {
-               "Ref": "CodeDeployServiceRole"
-            } ],
-            "Groups" : [ "csye6225-spring2018-team" ]
-         }
-      },
-
       "EC2Profile": {
          "Type": "AWS::IAM::InstanceProfile",
          "Properties": {
             "Path": "/",
             "Roles": [ { "Ref": "CodeDeployEC2ServiceRole" } ]
          }
-      },
-
-      "codedeployBucket" : {
-        "Type" : "AWS::S3::Bucket",
-         "Properties" : {
-           "BucketName" : "code-deploy.csye6225-spring2018-jiaxi.me"
-        }
       },
 
       "TravisUploadToS3" : {
@@ -180,8 +158,7 @@
             ]
           },
           "Groups" : [ "csye6225-spring2018-team" ]
-       }
-     }
-      
+        }
+      },
    }
 }

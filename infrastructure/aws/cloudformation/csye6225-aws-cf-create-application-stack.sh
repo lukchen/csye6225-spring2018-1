@@ -30,7 +30,7 @@ status=$(aws cloudformation describe-stacks --stack-name $stack --query 'Stacks[
 while [ $status != "CREATE_COMPLETE" ]
 	do 
 	echo "Stack $stack is creating, current status is $status ......"
-	sleep 30
+	sleep 10
 	status=$(aws cloudformation describe-stacks --stack-name $stack --query 'Stacks[*].StackStatus[]' --output text)
 	done
 
