@@ -69,7 +69,8 @@
 	        "Properties" : {
 			    "CidrBlock" : "10.0.0.0/24",
 			    "MapPublicIpOnLaunch" : "true",
-			    "VpcId" : {"Ref": "csye6225vpc"}
+			    "VpcId" : {"Ref": "csye6225vpc"},
+			    "Tags": [{"Key": "Name", "Value": "public"}]
 	  		}
 		},
 

@@ -28,8 +28,16 @@
     "VolumeType" : {
       "Type" : "String",
       "Default" : "gp2"
-    }
+    },
 
+    "PublicSubnetId":{
+      "Type" : "String",
+      "Default" : ""
+    },
+    "ec2SG":{
+      "Type" : "String",
+      "Default" : ""
+    },
    },
 
    "Resources" : {
@@ -39,9 +47,9 @@
          "Properties" : {
             "ImageId" : { "Ref" : "ImageId" },
             "SecurityGroupIds": [
-              "sg-02cdd975"
+              {"Ref" : "ec2SG" }
             ],
-            "SubnetId": "subnet-3559080a", 
+            "SubnetId": {"Ref" : "PublicSubnetId" }, 
             "KeyName": "MyKeyPair",
             "InstanceType" : { "Ref" : "InstanceType" },
             "DisableApiTermination" : "true",
