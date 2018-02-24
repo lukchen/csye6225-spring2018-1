@@ -12,9 +12,37 @@
 
    "Resources": {
 
-    "ABCDE" : {
-        "Type" : "AWS::CodeDeploy::Application"
-      },
+    "Application" : {
+        "Type" : "AWS::CodeDeploy::Application",
+        "Properties" : {
+          "ApplicationName" : "ABCDE",
+        }
+    },
+
+    "DeploymentGroup" : {
+      "Type" : "AWS::CodeDeploy::DeploymentGroup",
+      "Properties" : {
+        "ApplicationName" : {"Ref" : "Application"},
+        "Deployment" : {
+          "Description" : "First time",
+          "IgnoreApplicationStopFailures" : "false",
+          "Revision" : {
+            "RevisionType" : "S3",
+            "S3Location" : {
+              "Bucket" : "code-deploy.csye6225-spring2018-zenan.me",
+              "Key" : "csye6225-project.zip",
+              "BundleType" : "Zip",
+            }
+          }
+        },
+        "Ec2TagFilters" : [{
+          "Key" : {"Ref" : "Name"},
+          "Value" : {"Ref" : "MyTag"},
+          "Type" : "KEY_AND_VALUE"
+        }],
+        "ServiceRoleArn" : "arn:aws:iam::117941579736:role/CodeDeployServiceRole"
+      }
+    },
 
       "CodeDeployEC2ServiceRole": {
          "Type": "AWS::IAM::Role",
@@ -89,7 +117,7 @@
                     "codedeploy:GetApplicationRevision"
                   ],
                   "Resource": [
-                    "*"
+                    "arn:aws:codedeploy:us-east-1:117941579736:application:ABCDE"
                   ]
                 },
                 {
