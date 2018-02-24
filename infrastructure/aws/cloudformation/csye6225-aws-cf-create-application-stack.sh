@@ -11,4 +11,18 @@ ParameterKey=ImageId,ParameterValue=ami-66506c1c \
 ParameterKey=Size,ParameterValue=16 \
 ParameterKey=VolumeType,ParameterValue=gp2 
 
-echo "Stack $stack is created."
+
+sleep 30s
+
+EC2_ID=$(aws ec2 describe-instances --filter "Name=tag:Name,Values=MyTag" \
+--query 'Reservations[*].Instances[*].{id:InstanceId}' --output text)
+echo $EC2_ID
+
+ProfileName=$(aws iam list-instance-profiles-for-role --role-name CodeDeployEC2ServiceRole \
+--query 'InstanceProfiles[*].InstanceProfileName' --output text)
+echo $ProfileName
+
+aws ec2 associate-iam-instance-profile --instance-id $EC2_ID \
+--iam-instance-profile Name=$ProfileName
+aws ec2 describe-iam-instance-profile-associations
+

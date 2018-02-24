@@ -1,7 +1,10 @@
 language: node_js
+
+
 node_js: 
   - 8
 install: 
+
   - npm install
 
 branches:
@@ -12,16 +15,20 @@ script:
   - pwd
   - ls
 
+
 after_success:
   - mkdir codedeploy
   - zip -r csye6225-project-$TRAVIS_JOB_NUMBER.zip 
   - ls
   - mv csye6225-project-$TRAVIS_JOB_NUMBER.zip codedeploy/
+
   - ls 
   - cd codedeploy
   - ls
   - cd ..
+
   
+
 
 deploy:
   - provider: s3
@@ -34,7 +41,9 @@ deploy:
     on:
       branch: assignment6
 
+
 notification:
+
   email:
     recipients:
       - jia.xi@husky.neu.edu
