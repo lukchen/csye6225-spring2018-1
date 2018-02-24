@@ -1,3 +1,51 @@
 language: node_js
-node_js:
-  - "8"
+
+
+node_js: 
+  - 8
+install: 
+
+  - npm install
+
+branches:
+  only:
+  - assignment6 
+
+script:
+  - pwd
+  - ls
+
+
+after_success:
+  - mkdir codedeploy
+  - zip -r csye6225-project-$TRAVIS_JOB_NUMBER.zip 
+  - ls
+  - mv csye6225-project-$TRAVIS_JOB_NUMBER.zip codedeploy/
+
+  - ls 
+  - cd codedeploy
+  - ls
+  - cd ..
+
+  
+
+
+deploy:
+  - provider: s3
+    local_dir: codedeploy
+    bucket: $s3_bucket
+    region: us-east-1
+    skip_cleanup: true
+    access_key_id: $access_key_id
+    secret_access_key: $secret_access_key
+    on:
+      branch: assignment6
+
+
+notification:
+
+  email:
+    recipients:
+      - jia.xi@husky.neu.edu
+    on_success: never
+    on_failure: always
