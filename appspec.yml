@@ -4,5 +4,7 @@ os: linux
 files:             
   - source: ./appspec.yml
     destination: /home/ubuntu
+  - source: /
+    destination: /home/ubuntu  
 
 hooks:
