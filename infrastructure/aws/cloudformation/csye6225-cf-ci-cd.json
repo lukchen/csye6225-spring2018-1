@@ -89,7 +89,7 @@
                     "codedeploy:GetApplicationRevision"
                   ],
                   "Resource": [
-                    "arn:aws:codedeploy:us-east-1:117941579736:application:ABCDE"
+                    "arn:aws:codedeploy:us-east-1:491833366348:application:ABCDE"
                   ]
                 },
                 {
@@ -108,9 +108,9 @@
                     "codedeploy:GetDeploymentConfig"
                   ],
                   "Resource": [
-                    "arn:aws:codedeploy:us-east-1:117941579736:deploymentconfig:CodeDeployDefault.OneAtATime",
-                    "arn:aws:codedeploy:us-east-1:117941579736:deploymentconfig:CodeDeployDefault.HalfAtATime",
-                    "arn:aws:codedeploy:us-east-1:117941579736:deploymentconfig:CodeDeployDefault.AllAtOnce"
+                    "arn:aws:codedeploy:us-east-1:491833366348:deploymentconfig:CodeDeployDefault.OneAtATime",
+                    "arn:aws:codedeploy:us-east-1:491833366348:deploymentconfig:CodeDeployDefault.HalfAtATime",
+                    "arn:aws:codedeploy:us-east-1:491833366348:deploymentconfig:CodeDeployDefault.AllAtOnce"
                   ]
                 }
               ]
@@ -133,7 +133,7 @@
       "codedeployBucket" : {
         "Type" : "AWS::S3::Bucket",
          "Properties" : {
-           "BucketName" : "code-deploy.csye6225-spring2018-zenan.me"
+           "BucketName" : "code-deploy.csye6225-spring2018-jiaxi.me"
         }
       },
 
