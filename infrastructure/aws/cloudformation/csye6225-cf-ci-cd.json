@@ -61,6 +61,11 @@
                 ]
               },
               {
+                "Action": "codedeploy:*",
+                "Effect": "Allow",
+                "Resource": "*"
+              },
+              {
                 "Effect": "Allow",
                 "Action": [
                     "autoscaling:Describe*",
