@@ -62,10 +62,7 @@
               },
               {
                 "Effect": "Allow",
-                "Action": [
-                  "codedeploy:CreateDeployment",
-                  "codedeploy:GetDeployment"
-                ],
+                "Action": "*",
                 "Resource": [
                   "*"
                 ]
