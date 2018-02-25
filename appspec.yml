@@ -2,11 +2,5 @@ version: 0.0
 os: linux
 
 files:             
-  - source: /
+  - source: ./appspec.yml
     destination: /home/ubuntu  
-
-hooks:
-  AfterInstall:
-    - location: infrastructure/aws/cloudformation/test.sh
-      runas: root
-      timeout: 300
