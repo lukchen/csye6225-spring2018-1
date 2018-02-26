@@ -6,7 +6,7 @@ files:
     destination: /home/ubuntu  
 
 hooks:
-  Install:
+  AfterInstall:
     - location: /scripts/startapplication.sh
       runas: root
       timeout: 300
