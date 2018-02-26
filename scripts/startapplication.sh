@@ -1,2 +1,2 @@
 cd /home/ubuntu/
-npm run dev-server
+npm run dev-admin
