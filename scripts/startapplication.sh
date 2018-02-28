@@ -1,2 +1,2 @@
 cd /home/ubuntu/
-npm run test
+npm start
