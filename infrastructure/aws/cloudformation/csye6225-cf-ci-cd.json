@@ -16,6 +16,26 @@
         "Type" : "AWS::CodeDeploy::Application"
       },
 
+      "DeploymentGroup" : {
+        "Type" :"AWS::CodeDeploy::DeploymentGroup",
+        "Properties" : {
+          "ApplicationName" :  {"Ref" : "ABCDE"},
+          "DeploymentGroupName" : "DeployGroup",
+          "DeploymentConfigName" : "CodeDeployDefault.OneAtATime",
+         
+          "ServiceRoleArn" : {
+            "Fn::GetAtt" : [
+              "CodeDeployServiceRole","Arn"
+            ]
+          },
+          "Ec2TagFilters" : [{
+            "Type" : "KEY_AND_VALUE",
+            "Key" : "Name",
+            "Value" : "MyTag"
+          }]
+        }
+      },
+
       "CodeDeployEC2ServiceRole": {
          "Type": "AWS::IAM::Role",
          "Properties": {
