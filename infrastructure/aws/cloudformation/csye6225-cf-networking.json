@@ -74,15 +74,27 @@
 	  		}
 		},
 
-		"csye6225subnetfordb": {
+		"csye6225subnetfordb1": {
 		    "Type" : "AWS::EC2::Subnet",
 	        "Properties" : {
 			    "CidrBlock" : "10.0.1.0/24",
+          "AvailabilityZone" : "us-east-1a",
 			    "MapPublicIpOnLaunch" : "false",
-			    "VpcId" : {"Ref": "csye6225vpc"}
+			    "VpcId" : {"Ref": "csye6225vpc"},
+          "Tags": [{"Key": "Name1", "Value": "private1"}]
 	  		}
 		},
 
+    "csye6225subnetfordb2": {
+        "Type" : "AWS::EC2::Subnet",
+          "Properties" : {
+          "CidrBlock" : "10.0.2.0/24",
+          "AvailabilityZone" : "us-east-1d",
+          "MapPublicIpOnLaunch" : "false",
+          "VpcId" : {"Ref": "csye6225vpc"},
+          "Tags": [{"Key": "Name2", "Value": "private2"}]
+        }
+    },
 
 		"mySubnetRouteTableAssociation1" : {
             "Type" : "AWS::EC2::SubnetRouteTableAssociation",
@@ -95,10 +107,19 @@
       	"mySubnetRouteTableAssociation2" : {
             "Type" : "AWS::EC2::SubnetRouteTableAssociation",
             "Properties" : {
-	            "SubnetId" : { "Ref" : "csye6225subnetfordb" },
+	            "SubnetId" : { "Ref" : "csye6225subnetfordb1" },
 	            "RouteTableId" : { "Ref" : "csye6225privateroutetable" }
         	}
       	},
+
+
+        "mySubnetRouteTableAssociation3" : {
+            "Type" : "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties" : {
+              "SubnetId" : { "Ref" : "csye6225subnetfordb2" },
+              "RouteTableId" : { "Ref" : "csye6225privateroutetable" }
+          }
+        },    
 
 
       	"ec2SG": {

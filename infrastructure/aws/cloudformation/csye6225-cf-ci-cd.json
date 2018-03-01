@@ -114,6 +114,25 @@
          }
       },
 
+      "DeploymentGroup" : {
+        "Type" :"AWS::CodeDeploy::DeploymentGroup",
+        "Properties" : {
+          "ApplicationName" :  {"Ref" : "Application"},
+          "DeploymentGroupName" : "testgroup",
+          "DeploymentConfigName" : "CodeDeployDefault.OneAtATime",
+         
+          "ServiceRoleArn" : {
+            "Fn::GetAtt" : [
+              "CodeDeployServiceRole","Arn"
+            ]
+          },
+          "Ec2TagFilters" : [{
+            "Type" : "KEY_AND_VALUE",
+            "Key" : "Name",
+            "Value" : "MyTag"
+          }]
+        }
+      },
 
       "CodeDeployEC2S3": {
          "Type": "AWS::IAM::Policy",
