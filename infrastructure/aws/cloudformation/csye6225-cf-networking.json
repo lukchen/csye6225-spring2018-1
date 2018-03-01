@@ -68,20 +68,33 @@
 		    "Type" : "AWS::EC2::Subnet",
 	        "Properties" : {
 			    "CidrBlock" : "10.0.0.0/24",
-			    "MapPublicIpOnLaunch" : "false",
-			    "VpcId" : {"Ref": "csye6225vpc"}
+			    "MapPublicIpOnLaunch" : "true",
+			    "VpcId" : {"Ref": "csye6225vpc"},
+			    "Tags": [{"Key": "Name", "Value": "public"}]
 	  		}
 		},
 
-		"csye6225subnetfordb": {
+		"csye6225subnetfordb1": {
 		    "Type" : "AWS::EC2::Subnet",
 	        "Properties" : {
 			    "CidrBlock" : "10.0.1.0/24",
+          "AvailabilityZone" : "us-east-1a",
 			    "MapPublicIpOnLaunch" : "false",
-			    "VpcId" : {"Ref": "csye6225vpc"}
+			    "VpcId" : {"Ref": "csye6225vpc"},
+          "Tags": [{"Key": "Name1", "Value": "private1"}]
 	  		}
 		},
 
+    "csye6225subnetfordb2": {
+        "Type" : "AWS::EC2::Subnet",
+          "Properties" : {
+          "CidrBlock" : "10.0.2.0/24",
+          "AvailabilityZone" : "us-east-1d",
+          "MapPublicIpOnLaunch" : "false",
+          "VpcId" : {"Ref": "csye6225vpc"},
+          "Tags": [{"Key": "Name2", "Value": "private2"}]
+        }
+    },
 
 		"mySubnetRouteTableAssociation1" : {
             "Type" : "AWS::EC2::SubnetRouteTableAssociation",
@@ -94,10 +107,19 @@
       	"mySubnetRouteTableAssociation2" : {
             "Type" : "AWS::EC2::SubnetRouteTableAssociation",
             "Properties" : {
-	            "SubnetId" : { "Ref" : "csye6225subnetfordb" },
+	            "SubnetId" : { "Ref" : "csye6225subnetfordb1" },
 	            "RouteTableId" : { "Ref" : "csye6225privateroutetable" }
         	}
       	},
+
+
+        "mySubnetRouteTableAssociation3" : {
+            "Type" : "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties" : {
+              "SubnetId" : { "Ref" : "csye6225subnetfordb2" },
+              "RouteTableId" : { "Ref" : "csye6225privateroutetable" }
+          }
+        },    
 
 
       	"ec2SG": {
@@ -126,7 +148,20 @@
                         "FromPort": "443",
                         "ToPort": "443",
                         "CidrIp": "0.0.0.0/0"
-                    },
+                    }
+                ]
+            }
+        },
+
+        "WebServerSecurityGroup": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "csye6225vpc"
+                },
+                "GroupName": "csye6225-rds",
+                "GroupDescription": "Frontend Access2",
+                "SecurityGroupIngress": [
                     {
                         "IpProtocol": "tcp",
                         "FromPort": "3306",
@@ -135,7 +170,7 @@
                     }
                 ]
             }
-        },
+        },  
 
         "RDSSG": {
             "Type": "AWS::RDS::DBSecurityGroup",
@@ -143,18 +178,10 @@
                 "EC2VpcId": {
                     "Ref": "csye6225vpc"
                 },
-                "GroupDescription": "DB SecurityGroup",
-                "DBSecurityGroupIngress": [
-                    {
-                        "EC2SecurityGroupId": {
-                            "Ref": "ec2SG"
-                        }
-                    }
-                ],
-                "Tags": [{
-                    "Key": "Name",
-                    "Value": "csye6225-rds"
-                }]
+                "DBSecurityGroupIngress": { "EC2SecurityGroupId": { "Fn::GetAtt" : [ "WebServerSecurityGroup", "GroupId" ] } },
+
+                "GroupDescription": "Frontend Access"
+                
             }
         },
 

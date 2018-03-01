@@ -1,9 +1,0 @@
-{
-  "apps" : [{
-    "name"        : "ashen-server",
-    "script"      : "./server/index.js",
-    "watch"       : true,
-    "exec_interpreter" : "babel-node",
-    "exec_mode"        : "fork"
-  }]
-}

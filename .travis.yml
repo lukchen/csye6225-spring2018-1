@@ -1,15 +1,61 @@
 language: node_js
-node_js:
-  - "8"
-install:
-  - npm install    
+
+
+node_js: 
+  - 8
+install: 
+
+  - npm install
+
+branches:
+  only:
+  - assignment6 
+
+script:
+  - pwd
+  - ls
+
+
 after_success:
-  - mkdir codedeploy
-  - zip -r project-${TRAVIS_JOB_NUMBER}.zip *
-notifications:
+  - mkdir codedeploy_artifact
+  - zip -r csye6225-project.zip * -x node_modules/\*
+  - mv csye6225-project.zip codedeploy_artifact/
+  - ls 
+  - cd codedeploy_artifact
+  - ls
+  - cd ..
+
+  
+
+
+deploy:
+  - provider: s3
+    local_dir: codedeploy_artifact
+    bucket: $s3_bucket
+    region: us-east-1
+    skip_cleanup: true
+    access_key_id: $access_key_id
+    secret_access_key: $secret_access_key
+    on:
+      branch: assignment6
+  - provider: codedeploy
+    access_key_id: $access_key_id
+    bucket: $s3_bucket
+    key: csye6225-project.zip
+    bundle_type: zip
+    application: $application
+    deployment_group: $deployment_group
+    region: us-east-1
+    secret_access_key: $secret_access_key
+    wait-until-deployed: true
+    on:
+      branch: assignment6    
+
+
+notification:
+
   email:
     recipients:
-      - chen.zena@husky.neu.edu
-    on_success: never # default: change
-    on_failure: always # default: always   
-  
+      - jia.xi@husky.neu.edu
+    on_success: never
+    on_failure: always
