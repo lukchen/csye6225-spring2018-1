@@ -27,9 +27,6 @@ app
     .use(logger())
     .use(bodyParser())
     .use(helmet())
-    .use(function *(){
-	  this.body = 'Hello World';
-	});
 
 routing(app)
 

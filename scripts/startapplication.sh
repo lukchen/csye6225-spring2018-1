@@ -1,2 +1,2 @@
 cd /home/ubuntu/
-npm start
+sudo npm start
