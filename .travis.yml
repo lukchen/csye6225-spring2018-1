@@ -18,7 +18,7 @@ script:
 
 after_success:
   - mkdir codedeploy_artifact
-  - zip -r csye6225-project.zip * .* -x node_modules/\*
+  - zip -r csye6225-project.zip * .travis.yml .babelrc .npmignore -x node_modules/\*
   - mv csye6225-project.zip codedeploy_artifact/
   - ls 
   - cd codedeploy_artifact
