@@ -8,9 +8,9 @@ import fs from 'fs'
 import path from 'path'
 import {db, dbName} from '../config/'
 
-var mysql = require('mysql');
+var mysql1 = require('mysql');
 
-var connection = mysql.createConnection({
+var connection = mysql1.createConnection({
   host     : process.env.csye6225-spring2018.chibl3b1ztao.us-east-1.rds.amazonaws.com,
   user     : process.env.csye6225master,
   password : process.env.csye6225,
