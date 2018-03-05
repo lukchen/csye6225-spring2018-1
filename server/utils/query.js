@@ -9,9 +9,10 @@ import path from 'path'
 import {db, dbName} from '../config/'
 
 var mysql1 = require('mysql');
+String hostname = csye6225-spring2018.chibl3b1ztao.us-east-1.rds.amazonaws.com;
 
 var connection = mysql1.createConnection({
-  host     : process.env.csye6225-spring2018.chibl3b1ztao.us-east-1.rds.amazonaws.com,
+  host     : process.env.hostname,
   user     : process.env.csye6225master,
   password : process.env.csye6225,
   port     : process.env.3306
