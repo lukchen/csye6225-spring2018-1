@@ -9,16 +9,12 @@ import path from 'path'
 import {db, dbName} from '../config/'
 
 var mysql1 = require('mysql');
-let host = "csye6225-spring2018.chibl3b1ztao.us-east-1.rds.amazonaws.com";
-let user = "csye6225master";
-let password = "csye6225";
-let port = 3306;
 
 var connection = mysql1.createConnection({
-  host     : host,
-  user     : user,
-  password : password,
-  port     : port,
+  host     : 'csye6225-spring2018.chibl3b1ztao.us-east-1.rds.amazonaws.com',
+  user     : 'csye6225master',
+  password : 'csye6225password',
+  port     : '3306',
 });
 
 connection.connect(function(err) {
