@@ -81,7 +81,7 @@
           "AvailabilityZone" : "us-east-1a",
 			    "MapPublicIpOnLaunch" : "false",
 			    "VpcId" : {"Ref": "csye6225vpc"},
-          "Tags": [{"Key": "Name1", "Value": "private1"}]
+          "Tags": [{"Key": "Name", "Value": "private1"}]
 	  		}
 		},
 
@@ -92,7 +92,7 @@
           "AvailabilityZone" : "us-east-1d",
           "MapPublicIpOnLaunch" : "false",
           "VpcId" : {"Ref": "csye6225vpc"},
-          "Tags": [{"Key": "Name2", "Value": "private2"}]
+          "Tags": [{"Key": "Name", "Value": "private2"}]
         }
     },
 
@@ -150,38 +150,6 @@
                         "CidrIp": "0.0.0.0/0"
                     }
                 ]
-            }
-        },
-
-        "WebServerSecurityGroup": {
-            "Type": "AWS::EC2::SecurityGroup",
-            "Properties": {
-                "VpcId": {
-                    "Ref": "csye6225vpc"
-                },
-                "GroupName": "csye6225-rds",
-                "GroupDescription": "Frontend Access2",
-                "SecurityGroupIngress": [
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": "3306",
-                        "ToPort": "3306",
-                        "CidrIp": "0.0.0.0/0"
-                    }
-                ]
-            }
-        },  
-
-        "RDSSG": {
-            "Type": "AWS::RDS::DBSecurityGroup",
-            "Properties": {
-                "EC2VpcId": {
-                    "Ref": "csye6225vpc"
-                },
-                "DBSecurityGroupIngress": { "EC2SecurityGroupId": { "Fn::GetAtt" : [ "WebServerSecurityGroup", "GroupId" ] } },
-
-                "GroupDescription": "Frontend Access"
-                
             }
         },
 
