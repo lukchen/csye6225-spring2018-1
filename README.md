@@ -9,9 +9,9 @@ This web application is a seperation of back-end and front-end and use axios to 
 
 Application stack: MySQL--Linux--Node.js(koa.js)-Vue.js
 
-AWS infrastucture: 
+AWS infrastucture: [dev-local-github-travisci]-[VPC-EC2 Instance-RDS,S3,CodeDeploy,IAM,Route53]
 
-
+Application looks:
 
 ![image](https://github.com/lukchen/csye6225-spring2018/blob/master/Screenshot%20from%202018-03-07%2021-29-41.png)
 ![image](https://github.com/lukchen/csye6225-spring2018/blob/master/Screenshot%20from%202018-03-07%2021-31-50.png)
