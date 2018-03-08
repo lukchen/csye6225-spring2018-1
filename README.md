@@ -11,7 +11,12 @@ Application stack: MySQL--Linux--Node.js(koa.js)-Vue.js
 
 AWS infrastucture: 
 
+
+
 ![image](https://github.com/lukchen/csye6225-spring2018/blob/master/Screenshot%20from%202018-03-07%2021-29-41.png)
+![image](https://github.com/lukchen/csye6225-spring2018/blob/master/Screenshot%20from%202018-03-07%2021-31-50.png)
+![image](https://github.com/lukchen/csye6225-spring2018/blob/master/Screenshot%20from%202018-03-07%2021-32-50.png)
+
 
 
 
