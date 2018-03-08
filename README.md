@@ -11,7 +11,7 @@ Application stack: MySQL--Linux--Node.js(koa.js)-Vue.js
 
 AWS infrastucture: 
 
-https://drive.google.com/open?id=1WF7I0PJ4_ItX-Liqt9vv3L5ee-4nIq72
+![alt text](https://drive.google.com/open?id=1WF7I0PJ4_ItX-Liqt9vv3L5ee-4nIq72)
 
 
 
