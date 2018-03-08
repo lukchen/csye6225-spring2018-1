@@ -2,36 +2,29 @@ Online demo will be released soon
 
 ## Team member
 * Chen Qiu  qiu.che@husky.neu.edu
-* Xinglong Jia  jia.xi@husky.neu.edu
 * Zenan Chen  chen.zena@husky.neu.edu
+* Xinglong Jia  jia.xi@husky.neu.edu
+
+This web application is a seperation of back-end and front-end and use axios to send data, it basiclly contains three parts: server, client, admin.
+
+Application stack: MySQL--Linux--Node.js(koa.js)-Vue.js
+
+AWS infrastucture: 
+
+https://drive.google.com/open?id=1WF7I0PJ4_ItX-Liqt9vv3L5ee-4nIq72
+
 
 
 ## Sign up/ Sign in
 
   This project accomplised a website sign up/ sign in function, user's information will be store in database and password will be encrypted,
-  This web application is a seperation of back-end and front-end and use axios to send data, it basiclly contains three parts: server, client, admin.
 
 ## Prerequisites
 
-Application stack: MySQL--Linux--Node.js(koa)-Vue.js
+if you want to run this application locally, install mysql-server and apache2, then modify the config file under server/
+install mode.js 9.5.0, npm 5.6
+npm install
 
-## installing
-install MySQL
-```
-$ sudo apt-get update
-$ sudo apt-get install mysql-server
-$ mysql_secure_installation
-
-```
-install npm
-```
-$ sudo apt-get update && sudo apt-get -y upgrade
-```
-install Nodejs
-```
-curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
-sudo apt-get install -y nodejs
-```
 ## Deployment
 
 MySQL port is default 3306.
