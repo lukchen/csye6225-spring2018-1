@@ -18,7 +18,7 @@ Application looks:
 ![image](https://github.com/lukchen/csye6225-spring2018/blob/master/Screenshot%20from%202018-03-07%2021-32-50.png)
 
 
-
+usage:
 
 ## Sign up/ Sign in
 
@@ -51,34 +51,13 @@ Admin: application management, provides sign in/sign up modules, It is listening
 
 start admin as dev: npm run dev-admin
 
-## Install JMeter and JMeter plugins
+When depoly on AWS, use pm2 to package start server side and admin/client side
 
-```
-$ python bin/JMeterInstaller.py
-```
-
-The installer will also install several JMeter Plugins, which can be used directly or within a continuous integration server such as Jenkins
-
-## Open Tests in JMeter
-
-```
-apache-jmeter-3.0/bin/jmeter.sh -t tests/my_test.jmx
-```
-
-This will load the JMeter GUI. This very simple test hits http://localhost 1 time, with 1 user
-
-- Run the tests with Command-R
-- See results by clicking in any of the Graph or Tree nodes
-- Stop tests with Command-period
-- Clear results with Command-E
+## use JMeter test sign up/sign in 
 
 - On Jmeter, open Signup with scv.jmx, which sets the csv config, the thread group nubmber and HTTP request, signup 100 users to website.
 - Then open Login with scv.jmx, which login use the 100 users registered on Signup with scv.jmx, to test the the web client/server structure.
 
-## Running Headless Tests
-
-Especially in a continuous integration server, you'll want to run JMeter tests "headlessly", i.e. without a graphical user interface.
-x
 ## Contributing
 
 1. Fork it (<https://github.com/yourname/yourproject/fork>)
