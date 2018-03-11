@@ -8,26 +8,6 @@ import fs from 'fs'
 import path from 'path'
 import {db, dbName} from '../config/'
 
-var mysql1 = require('mysql');
-
-var connection = mysql1.createConnection({
-  host     : 'csye6225-spring2018.chibl3b1ztao.us-east-1.rds.amazonaws.com',
-  user     : 'csye6225master',
-  password : 'csye6225password',
-  port     : '3306',
-});
-
-connection.connect(function(err) {
-  if (err) {
-    console.error('Database connection failed: ' + err.stack);
-    return;
-  }
-
-  console.log('Connected to database.');
-});
-
-connection.end();
-
 let pool
 const sqlSource = fs.readFileSync(path.resolve(__dirname, '..', './sql/ashen_db.sql'), 'utf-8')
 const init = mysql.createConnection(db)
@@ -37,10 +17,10 @@ init.query('CREATE DATABASE ashen_db', err => {
     Object.assign(db, dbName)
     pool = mysql.createPool(db)
     if (err) {
-        console.log('✅  Ashen Database created already.')
+        console.log('✅  Database created already.')
     }
     else {
-        console.log('✅  Create Ashen Database')
+        console.log('✅  Create Database')
         query(sqlSource).then(res => console.log('✅  Import sql file'))
     }
 })
