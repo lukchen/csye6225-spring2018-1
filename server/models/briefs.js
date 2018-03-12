@@ -7,12 +7,12 @@ import query from '../utils/query'
 import escape from '../utils/escape'
 
 class Briefs {
-    async getBrief() {
-        return await query(`SELECT * FROM ABOUT`)
+    async getBrief(username) {
+        return await query(escape`SELECT content FROM ABOUT WHERE user=${username}`)
     }
 
-    async updateBrief(id, content) {
-        return await query(escape`UPDATE ABOUT SET content=${content} WHERE id=${id}`)
+    async updateBrief(user, content) {
+        return await query(escape`UPDATE ABOUT SET content=${content} WHERE user=${user}`)
     }
 }
 

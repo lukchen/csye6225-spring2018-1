@@ -26,7 +26,7 @@ import SimpleMDE from 'simplemde'
 export default {
     data() {
         return {
-            id: '',
+            user: '',
             simplemde: ''
         }
     },
@@ -35,16 +35,25 @@ export default {
             autoDownloadFontAwesome: false,
             spellChecker: false
         })
-        axios.get('/api/v1/briefs')
+
+        axios.get('/api/v1/profile',)
             .then(res => {
-                this.id = res.data[0].id
-                this.simplemde.value(res.data[0].content)
-            })
+                this.user = res.data[0].user
+                console.log(this.user)
+                axios.post(
+                '/api/v1/briefs',
+                {
+                    username: this.user
+                })
+                .then(res => {
+                    this.simplemde.value(res.data[0].content)
+                })
+            })      
     },
     methods: {
         updateAbout() {
             axios.put(
-                `/api/v1/briefs/${this.id}`,
+                `/api/v1/briefs/${this.user}`,
                 {
                     content: this.simplemde.value()
                 },

@@ -28,15 +28,16 @@ DROP TABLE IF EXISTS `ABOUT`;
 CREATE TABLE `ABOUT` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `content` longtext,
+  `user` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `ABOUT` WRITE;
 /*!40000 ALTER TABLE `ABOUT` DISABLE KEYS */;
 
-INSERT INTO `ABOUT` (`id`, `content`)
+INSERT INTO `ABOUT` (`id`, `content`, `user`)
 VALUES
-	(1,'* 独立之精神\n* 自由之思想');
+	(1,'* 独立之精神\n* 自由之思想', 'abc@abc.abc');
 
 /*!40000 ALTER TABLE `ABOUT` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -110,10 +111,31 @@ LOCK TABLES `USER` WRITE;
 
 INSERT INTO `USER` (`id`, `user`, `password`)
 VALUES
-	(1,'chen.zena@husky.neu.edu','e5d2a815230449badccf00bc67436696');
+	(1,'abc@abc.abc','123');
 
 /*!40000 ALTER TABLE `USER` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+# Dump of table USERTEMP
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `USERTEMP`;
+
+CREATE TABLE `USERTEMP` (
+  `user` varchar(255) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `USERTEMP` WRITE;
+/*!40000 ALTER TABLE `USERTEMP` DISABLE KEYS */;
+
+INSERT INTO `USERTEMP` (`user`)
+VALUES
+  ('abc@abc.abc');
+
+/*!40000 ALTER TABLE `USERTEMP` ENABLE KEYS */;
+UNLOCK TABLES;
+
 
 
 

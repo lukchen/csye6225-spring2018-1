@@ -7,13 +7,18 @@ import Brief from '../models/briefs'
 
 class BriefControllers {
     async getBrief(ctx) {
-        ctx.body = await Brief.getBrief()
+    	var {
+            username,
+        } = ctx.request.body
+
+        ctx.body = await Brief.getBrief(username)
+        console.log(ctx.body)
     }
 
     async updateBrief(ctx) {
-        const id = ctx.params.id
+        const user = ctx.params.user
         const content = ctx.request.body.content
-        ctx.body = await Brief.updateBrief(id, content)
+        ctx.body = await Brief.updateBrief(user, content)
     }
 }
 

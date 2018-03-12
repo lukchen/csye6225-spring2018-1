@@ -14,8 +14,8 @@ const router = new Router()
 
 router.prefix(`/${baseApi}/${api}`)
 
-router.get('/', BriefController.getBrief)
-router.put('/:id', verify, BriefController.updateBrief)
+router.post('/', BriefController.getBrief)
+router.put('/:user', verify, BriefController.updateBrief)
 
 module.exports = router
 
