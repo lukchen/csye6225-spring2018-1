@@ -27,6 +27,7 @@ export default {
 
     data() {
         return {
+            user: '',
             image: '',
             message: '',
 
@@ -47,7 +48,16 @@ export default {
                 this.books = res.data
             })
             .catch(err => alert(err))
-        axios.get('/api/v1/image')
+
+        axios.get('/api/v1/profile',)
+            .then(res => {
+            this.user = res.data[0].user
+            console.log(this.user)
+            
+            axios.post('/api/v1/image',
+            {
+                user: this.user
+            })
             .then(res => {
                 if(res.data=="you dont have picture yet"){
                     alert("you dont have picture yet");
@@ -55,7 +65,9 @@ export default {
                     this.image = res.data
                 }
             })
-            .catch(err => alert(err))    
+                        
+        })              
+            
     },
     methods: {
 
@@ -72,28 +84,43 @@ export default {
 
           reader.onload = (e) => {            
             vm.image = e.target.result;
-            axios.put('/api/v1/image', vm.image)
+
+            axios.get('/api/v1/profile',)
             .then(res => {
-                this.message = res.data
-                if(this.message=="This username already exists!"){
-                    alert('This username already exists!')
-                }else if(this.message=="Sign up successfull!"){
-                    alert('Sign up successfull!')
-                }
-            })
-            .catch(err => alert(err));
+                this.user = res.data[0].user
+                console.log(this.user)
+                axios.put('/api/v1/image', 
+                    {
+                        image: vm.image,
+                        user: this.user
+                    })
+                .then(res => {
+                    this.message = res.data
+                    if(this.message=="This username already exists!"){
+                        alert('This username already exists!')
+                    }else if(this.message=="Sign up successfull!"){
+                        alert('Sign up successfull!')
+                    }
+                })
+                .catch(err => alert(err));
+                
+            })            
 
           };
           reader.readAsDataURL(file);
         },
         removeImage: function (e) {
           this.image = '';
-          axios.delete('/api/v1/image')
+          axios.post(`/api/v1/image/${this.user}`)
             .then(res => {
                 this.message = res.data
                 if(this.message=="delete successfully!"){
                     alert('delete successfully!')
                 }
+                if(this.message=="you dont have picture yet!"){
+                    alert('you dont have picture yet!')
+                }
+
             })
             .catch(err => alert(err));
         },

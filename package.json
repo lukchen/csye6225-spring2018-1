@@ -19,6 +19,7 @@
     "aws-sdk": "^2.207.0",
     "axios": "^0.17.1",
     "babel-preset-es2015": "^6.24.1",
+    "base64-to-image": "^1.0.2",
     "bcryptjs": "^2.4.3",
     "element-ui": "^2.0.11",
     "font-awesome": "^4.7.0",

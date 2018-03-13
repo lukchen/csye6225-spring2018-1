@@ -10,8 +10,8 @@ router.prefix(`/${baseApi}/${api}`)
 
 router.put('/', ImageController.imageStore)
 
-router.get('/', ImageController.imageRead)
+router.post('/', ImageController.imageRead)
 
-router.delete('/', ImageController.imageDelete)
+router.post('/:user', ImageController.imageDelete)
 
 module.exports = router
