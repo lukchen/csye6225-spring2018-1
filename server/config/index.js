@@ -4,10 +4,10 @@
  */
 
 export const db = {
-    host: '127.0.0.1',
+    host: 'ec2-34-239-101-199.compute-1.amazonaws.com',
     port: '3306',
-    user: 'root',
-    password: 'root',
+    user: 'csye6225master',
+    password: 'csye6225password',
     multipleStatements: true
 }
 
