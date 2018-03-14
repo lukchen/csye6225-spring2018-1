@@ -1,3 +1,3 @@
 cd /home/ubuntu/
 sudo npm start
-sudo npm run dev-server
+sudo npm run dev-admin
