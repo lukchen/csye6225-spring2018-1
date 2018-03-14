@@ -18,6 +18,7 @@ init.query('CREATE DATABASE ashen_db', err => {
     pool = mysql.createPool(db)
     if (err) {
         console.log('✅  Database created already.')
+        console.log(err)
     }
     else {
         console.log('✅  Create Database')
