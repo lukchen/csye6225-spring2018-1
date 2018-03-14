@@ -165,6 +165,24 @@
             }
         },
 
+    "DBSecurityGroup": {
+        "Type": "AWS::EC2::SecurityGroup",
+        "Properties": {
+        "Tags" :  [{"Key" : "Name", "Value" : "RDSSG"}],
+            "GroupName":"csye6225-rds",
+            "GroupDescription": "database",
+            "VpcId":{"Ref":"csye6225vpc"},
+            "SecurityGroupIngress": [
+                {
+                    "IpProtocol": "tcp",
+                    "FromPort": "3306",
+                    "ToPort": "3306",
+                    "SourceSecurityGroupId" : {"Ref":"ec2SG"}
+                }
+            ]
+        }
+    },   
+
 		"csye6225route": {
 			"Type": "AWS::EC2::Route",
 			"DependsOn": "AttachGateway",

@@ -50,6 +50,11 @@
       "Default" : ""
     },
 
+    "RDSSG":{
+      "Type" : "String",
+      "Default" : ""
+    },
+
     "csye6225vpc":{
       "Type" : "String",
       "Default" : ""
@@ -144,37 +149,6 @@
          }
       },
 
-      "WebServerSecurityGroup": {
-          "Type": "AWS::EC2::SecurityGroup",
-          "Properties": {
-              "VpcId": {
-                  "Ref": "csye6225vpc"
-              },
-              "GroupName": "csye6225-rds",
-              "GroupDescription": "Frontend Access2",
-              "SecurityGroupIngress": [
-                  {
-                      "IpProtocol": "tcp",
-                      "FromPort": "3306",
-                      "ToPort": "3306",
-                      "CidrIp": "0.0.0.0/0"
-                  }
-              ]
-          }
-      },  
-
-      "RDSSG": {
-          "Type": "AWS::RDS::DBSecurityGroup",
-          "Properties": {
-              "EC2VpcId": {
-                  "Ref": "csye6225vpc"
-              },
-              "DBSecurityGroupIngress": { "EC2SecurityGroupId": { "Fn::GetAtt" : [ "WebServerSecurityGroup", "GroupId" ] } },
-              "GroupDescription": "Frontend Access",
-              "Tags": [{"Key": "Name", "Value": "RDSSG"}]
-          }
-      },
-
       "MyDB" : {
         "Type" : "AWS::RDS::DBInstance",
         "Properties" : {
@@ -182,7 +156,7 @@
           "Engine" : "MySQL",
           "EngineVersion" : "5.6.37",
           "DBInstanceClass" : "db.t2.medium",
-          "DBSecurityGroups" : [
+          "VPCSecurityGroups" : [
             {"Ref" : "RDSSG"}
           ],
           "DBSubnetGroupName": {"Ref" : "myDBSubnetGroup" },

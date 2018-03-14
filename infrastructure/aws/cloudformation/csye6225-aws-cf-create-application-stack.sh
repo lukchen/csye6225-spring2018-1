@@ -4,6 +4,7 @@ publicSubnetId=$(aws ec2 describe-subnets --filter "Name=tag:Name,Values=public"
 privateSubnetId1=$(aws ec2 describe-subnets --filter "Name=tag:Name,Values=private1" --query 'Subnets[*].SubnetId' --output text)
 privateSubnetId2=$(aws ec2 describe-subnets --filter "Name=tag:Name,Values=private2" --query 'Subnets[*].SubnetId' --output text)
 ec2SGId=$(aws ec2 describe-security-groups --filter "Name=group-name,Values=csye6225-webapp" --query 'SecurityGroups[*].GroupId' --output text)
+RDSSG=$(aws ec2 describe-security-groups --filter "Name=group-name,Values=csye6225-rds" --query 'SecurityGroups[*].GroupId' --output text)
 VpcId=$(aws ec2 describe-vpcs --filter "Name=tag:Name,Values=STACK_NAME-csye6225-vpc" --query 'Vpcs[*].VpcId' --output text)
 echo "Start to create Stack $stack ......"
 aws cloudformation create-stack --stack-name $stack \
@@ -16,6 +17,7 @@ ParameterKey=VolumeType,ParameterValue=gp2 \
 ParameterKey=PublicSubnetId,ParameterValue=$publicSubnetId \
 ParameterKey=csye6225vpc,ParameterValue=$VpcId \
 ParameterKey=ec2SG,ParameterValue=$ec2SGId \
+ParameterKey=RDSSG,ParameterValue=$RDSSG \
 ParameterKey=PrivateSubnetId1,ParameterValue=$privateSubnetId1 \
 ParameterKey=PrivateSubnetId2,ParameterValue=$privateSubnetId2 
 
