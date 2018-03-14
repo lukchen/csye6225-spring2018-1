@@ -6,8 +6,8 @@
 export const db = {
     host: 'csye6225-spring2018.chibl3b1ztao.us-east-1.rds.amazonaws.com',
     port: '3306',
-    user: 'csye6225master',
-    password: 'csye6225password',
+    user: 'root',
+    password: 'root',
     multipleStatements: true
 }
 

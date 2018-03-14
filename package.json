@@ -5,13 +5,13 @@
   "author": "StudentWan <chen.zena@husky.neu.edu>",
   "private": true,
   "scripts": {
-    "start": "forever start --minUptime 1000 --spinSleepTime 1000 server/index.js",
+    "start": "pm2 start pm2_config.json",
     "babel-node": "babel-node --presets=/*a*/ --ignore='foo|bar|baz'",
     "dev-client": "node client/build/dev-server.js",
     "build-client": "node client/build/build.js",
     "dev-admin": "forever start --minUptime 1000 --spinSleepTime 1000 admin/build/dev-server.js",
     "build-admin": "node admin/build/build.js",
-    "dev-server": "forever start --minUptime 1000 --spinSleepTime 1000 -c nodemon server/ --exec babel-node",
+    "dev-server": "forever start --minUptime 1000 --spinSleepTime 1000 server/index.js",
     "lint": "eslint --ext .js,.vue src",
     "test": "mocha"
   },
