@@ -13,7 +13,7 @@ import store from './store'
 
 Vue.config.productionTip = false
 
-axios.defaults.baseURL = 'http://ec2-52-72-142-242.compute-1.amazonaws.com:3000'
+axios.defaults.baseURL = 'http://ec2-54-84-180-12.compute-1.amazonaws.com:3000'
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
 /* eslint-disable no-new */
