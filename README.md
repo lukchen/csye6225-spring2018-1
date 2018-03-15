@@ -1,4 +1,5 @@
-Online demo will be released soon
+[Demo Link](http://ec2-52-70-86-44.compute-1.amazonaws.com:8080)
+Use valid email to sign up and login 
 
 ## Team member
 * Chen Qiu  qiu.che@husky.neu.edu
