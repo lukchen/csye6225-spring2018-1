@@ -1,5 +1,5 @@
 [Demo Link](http://ec2-52-70-86-44.compute-1.amazonaws.com:8080)
-Use valid email to sign up and login 
+Use valid email to sign up and login, the user profile data stored in RDS and S3 Bucket
 
 ## Team member
 * Chen Qiu  qiu.che@husky.neu.edu
