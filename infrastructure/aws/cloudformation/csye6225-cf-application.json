@@ -58,6 +58,11 @@
     "csye6225vpc":{
       "Type" : "String",
       "Default" : ""
+    },
+
+    "lambdaarn":{
+      "Type" : "String",
+      "Default" : ""
     }
    },
 
@@ -167,6 +172,17 @@
           "PubliclyAccessible" : "false",
           "Tags" : [ { "Key" : "Name", "Value" : "csye6225" } ],
           "AllocatedStorage" : "10"
+        }
+      },
+
+      "MySNSTopic" : {
+        "Type" : "AWS::SNS::Topic",
+        "Properties" : {
+          "Subscription" : [{
+              "Endpoint" : { "Ref": "lambdaarn" },
+              "Protocol" : "lambda"
+          }],
+          "TopicName" : "password_reset"
         }
       },
 
