@@ -1,4 +1,5 @@
-Online demo will be released soon
+[Demo Link](http://ec2-54-89-171-91.compute-1.amazonaws.com:8080)
+Use valid email to sign up and login, the user profile data stored in RDS and S3 Bucket
 
 ## Team member
 * Chen Qiu  qiu.che@husky.neu.edu
