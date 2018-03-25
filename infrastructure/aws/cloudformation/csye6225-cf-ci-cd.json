@@ -19,10 +19,11 @@
           }
       },
 
+
       "codedeployBucket" : {
         "Type" : "AWS::S3::Bucket",
          "Properties" : {
-           "BucketName" : "code-deploy.csye6225-spring2018-zenan.me"
+           "BucketName" : "code-deploy.csye6225-spring2018-jiaxi.me"
         }
       },
 
@@ -45,6 +46,9 @@
       },
 
       "CodeDeployServiceRole": {
+
+      "CodeDeployEC2ServiceRole": {
+
          "Type": "AWS::IAM::Role",
          "Properties": {
             "AssumeRolePolicyDocument": {

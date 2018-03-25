@@ -21,6 +21,8 @@ Application looks:
 
 usage:
 
+usage:
+
 ## Sign up/ Sign in
 
   This project accomplised a website sign up/ sign in function, user's information will be store in database and password will be encrypted,
