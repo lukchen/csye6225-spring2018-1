@@ -27,6 +27,24 @@
         }
       },
 
+      "lambdafunction": {
+        "Type": "AWS::Lambda::Function",
+        "Properties": {
+          "Handler": "index.handler",
+          "FunctionName" : "lambdatest",
+          "Role": { "Fn::GetAtt" : ["LambdaExecutionRole", "Arn"] },
+          "Code": {
+            "S3Bucket": "lambda-function-zenan",
+            "S3Key": "lambdacode.zip"
+          },
+          "Runtime": "nodejs6.10",
+          "Tags" : [{
+            "Key" : "fuck",
+            "Value" : "shit"
+          }]    
+        }
+      },
+
       "CodeDeployServiceRole": {
 
       "CodeDeployEC2ServiceRole": {
@@ -45,6 +63,37 @@
             },
             "RoleName": "CodeDeployServiceRole"
          }
+      },
+
+      "LambdaExecutionRole": {
+        "Type": "AWS::IAM::Role",
+        "Properties": {
+          "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [{ "Effect": "Allow", "Principal": {"Service": ["lambda.amazonaws.com"]}, "Action": ["sts:AssumeRole"] }]
+          },
+          "Policies": [{
+            "PolicyName": "root",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [{ 
+                "Effect": "Allow", 
+                "Action": [
+                  "cloudwatch:*",
+                  "dynamodb:*",
+                  "ses:*",
+                  "events:*",
+                  "lambda:*",
+                  "logs:*",
+                  "s3:*"
+                ],
+                "Resource": "*" 
+              }]
+            }
+          }],
+
+          "RoleName": "lambda-sns-execution-role"
+        }
       },
 
       "TravisCodeDeploy": {

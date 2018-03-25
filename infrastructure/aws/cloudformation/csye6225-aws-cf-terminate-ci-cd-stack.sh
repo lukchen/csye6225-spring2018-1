@@ -8,9 +8,6 @@ echo "Now clear the stack bucket ......"
 aws s3 rm s3://code-deploy.csye6225-spring2018-jiaxi.me --recursive
 
 
-EC2_ID=$(aws ec2 describe-instances --filter "Name=tag,Values=$stack" --query 'Reservations[*].Instances[*].{id:InstanceId}' --output text)
-echo $EC2_ID
-
 ProfileName=$(aws iam list-instance-profiles-for-role --role-name CodeDeployEC2ServiceRole --query 'InstanceProfiles[*].InstanceProfileName' --output text)
 
 echo $ProfileName

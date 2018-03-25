@@ -5,6 +5,9 @@
 
 import jwt from 'jsonwebtoken'
 import User from '../models/users'
+import query from '../utils/query'
+import escape from '../utils/escape'
+
 var bcrypt = require('bcryptjs');
 
 import {
@@ -29,6 +32,7 @@ class TokenControllers {
                     exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60// 一天
                 }, secret)
                 ctx.body = token
+                query(escape`UPDATE USERTEMP SET user=${username}`)
             }
             else {
                 ctx.throw(401, 'Wrong password! Please try again...')

@@ -17,10 +17,11 @@ init.query('CREATE DATABASE ashen_db', err => {
     Object.assign(db, dbName)
     pool = mysql.createPool(db)
     if (err) {
-        console.log('✅  Ashen Database created already.')
+        console.log('✅  Database created already.')
+        console.log(err)
     }
     else {
-        console.log('✅  Create Ashen Database')
+        console.log('✅  Create Database')
         query(sqlSource).then(res => console.log('✅  Import sql file'))
     }
 })

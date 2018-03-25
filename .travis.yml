@@ -17,17 +17,13 @@ script:
 
 
 after_success:
-  - mkdir codedeploy
-  - zip -r csye6225-project.zip * -x node_modules/\* 
-  - ls
-  - mv csye6225-project.zip codedeploy/
+  - mkdir codedeploy_artifact
+  - zip -r csye6225-project.zip * .travis.yml .babelrc .npmignore -x node_modules/\*
+  - mv csye6225-project.zip codedeploy_artifact/
   - ls 
   - cd codedeploy_artifact
   - ls
   - cd ..
-
-  
-
 
 deploy:
   - provider: s3
@@ -51,7 +47,6 @@ deploy:
     wait-until-deployed: true
     on:
       branch: assignment6    
-
 
 notification:
 

@@ -4,6 +4,9 @@ echo "Below is the stacks you have:"
 aws cloudformation describe-stacks
 read -p "Please enter the Stack name you want to delete: " stack
 
+echo "Now clear the stack bucket ......"
+aws s3 rm s3://s3.csye6225-spring2018-zenan.me --recursive
+
 echo "Start to change instance termination in Stack $stack... "
 EC2_ID=$(aws ec2 describe-instances --filter "Name=tag:Name,Values=MyTag" --query 'Reservations[*].Instances[*].{id:InstanceId}' --output text)
 
