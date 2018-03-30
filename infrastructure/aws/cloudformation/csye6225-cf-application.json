@@ -120,7 +120,7 @@
                {
                  "Key" : "Name",
                  "Value" : "MyTag"
-               },  
+               } 
             ]           
          }
       },
@@ -131,7 +131,7 @@
             "Size" : { "Ref" : "Size" },
             "Encrypted" : "true",
             "VolumeType" : { "Ref" : "VolumeType" },
-            "AvailabilityZone" : { "Fn::GetAtt" : [ "EC2", "AvailabilityZone" ] },
+            "AvailabilityZone" : { "Fn::GetAtt" : [ "EC2", "AvailabilityZone" ] }
          }
       },
 
@@ -210,7 +210,7 @@
          "Properties" : {
            "BucketName" : "s3.csye6225-spring2018-zenan.me"
         }
-      },
+      }
 
     } 
 }
