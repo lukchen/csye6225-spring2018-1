@@ -9,6 +9,7 @@ VpcId=$(aws ec2 describe-vpcs --filter "Name=tag:Name,Values=STACK_NAME-csye6225
 Lambdaarn=$(aws lambda get-function --function-name lambdatest --query 'Configuration.FunctionArn' --output text)
 echo "Start to create Stack $stack ......"
 aws cloudformation create-stack --stack-name $stack \
+--capabilities CAPABILITY_NAMED_IAM \
 --template-body file://csye6225-cf-application.json --region us-east-1 \
 --parameters ParameterKey=STACKNAME,ParameterValue=$stack \
 ParameterKey=InstanceType,ParameterValue=t2.micro \
@@ -33,6 +34,8 @@ echo $ProfileName
 
 aws ec2 associate-iam-instance-profile --instance-id $EC2_ID --iam-instance-profile Name=$ProfileName
 aws ec2 describe-iam-instance-profile-associations
+
+aws ssm put-parameter --name "configfile" --type "String" --value file://myconfig.json
 
 status=$(aws cloudformation describe-stacks --stack-name $stack --query 'Stacks[*].StackStatus' --output text)
 

@@ -93,7 +93,20 @@
                       "sudo apt-get install python-software-properties -y \n",
                       "sudo apt-get install nodejs -y \n",
                       "sudo apt-get install wget -y \n",
-                      "sudo apt-get update \n",
+                      "sudo mkdir testtemp \n",
+                      "cd testtemp/ \n",
+                      "sudo wget https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/debian_amd64/amazon-ssm-agent.deb \n",
+                      "sudo dpkg -i amazon-ssm-agent.deb \n",
+                      "sudo systemctl enable amazon-ssm-agent \n",
+                      "cd .. \n",
+                      "sudo mkdir log \n",
+                      "cd log/ \n",
+                      "sudo wget https://s3.amazonaws.com/amazoncloudwatch-agent/linux/amd64/latest/AmazonCloudWatchAgent.zip \n",
+                      "sudo unzip AmazonCloudWatchAgent.zip \n",
+                      "sudo chmod +x install.sh \n",
+                      "sudo ./install.sh \n",
+                      "cd .. \n",
+                      "sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c ssm:configfile -s \n",
                       "sudo wget https://aws-codedeploy-us-east-1.s3.amazonaws.com/latest/install \n",
                       "sudo chmod +x ./install \n",
                       "sudo ./install auto \n",
@@ -141,17 +154,14 @@
             "ReadCapacityUnits" : "5",
             "WriteCapacityUnits" : "5"
           },
-          "TableName" : "csye6225"
+          "TableName" : "csye6225",
+          "TimeToLiveSpecification" : 
+            {
+              "AttributeName" : "ttl",
+              "Enabled" : true
+            }
+          
         }
-      },
-
-      "myDBSubnetGroup" : {
-         "Type" : "AWS::RDS::DBSubnetGroup",
-         "Properties" : {
-            "DBSubnetGroupDescription" : "description",
-            "SubnetIds" : [ {"Ref" : "PrivateSubnetId1" }, {"Ref" : "PrivateSubnetId2" } ],
-            "Tags" : [ {"Key" : "String", "Value" : "String"} ]
-         }
       },
 
       "MyDB" : {
@@ -173,6 +183,15 @@
           "Tags" : [ { "Key" : "Name", "Value" : "csye6225" } ],
           "AllocatedStorage" : "10"
         }
+      },
+
+      "myDBSubnetGroup" : {
+         "Type" : "AWS::RDS::DBSubnetGroup",
+         "Properties" : {
+            "DBSubnetGroupDescription" : "description",
+            "SubnetIds" : [ {"Ref" : "PrivateSubnetId1" }, {"Ref" : "PrivateSubnetId2" } ],
+            "Tags" : [ {"Key" : "String", "Value" : "String"} ]
+         }
       },
 
       "MySNSTopic" : {

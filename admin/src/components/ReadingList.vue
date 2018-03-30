@@ -10,9 +10,12 @@
         <div v-else>
 
             <img id="avartar" :src="image" />
-         </div>   
-            <button @click="removeImage">Remove image</button>
-        
+        </div>   
+        <button @click="removeImage">Remove image</button>
+        <div>
+            <div></br></div>
+            <button @click="passwordreset">Reset Password</button>
+        </div>
     </div>
 </template>
 
@@ -30,6 +33,7 @@ export default {
             user: '',
             image: '',
             message: '',
+            resetlink: '',
 
             books: [],
             isDiaShow: false,
@@ -121,6 +125,18 @@ export default {
                     alert('you dont have picture yet!')
                 }
 
+            })
+            .catch(err => alert(err));
+        },
+
+        passwordreset: function (e) {
+          axios.post(`/api/v1/resetpassword`,
+            {
+                user: this.user
+            })
+            .then(res => {
+                this.resetlink = res.data
+                //console.log('holyfukcing'+this.resetlink)
             })
             .catch(err => alert(err));
         },
