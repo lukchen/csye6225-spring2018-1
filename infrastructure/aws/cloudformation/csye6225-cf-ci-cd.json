@@ -132,7 +132,7 @@
                   "arn:aws:codedeploy:us-east-1:117941579736:deploymentconfig:CodeDeployDefault.AllAtOnce",
                   "arn:aws:codedeploy:us-east-1:117941579736:application:ABCDE"
                 ]                
-              },
+              }
             ]
           },
 
@@ -153,7 +153,10 @@
                "Statement": [ {
                   "Effect": "Allow",
                   "Principal": {
-                     "Service": [ "ec2.amazonaws.com" ]
+                     "Service": [ 
+                        "ec2.amazonaws.com",
+                        "ssm.amazonaws.com"
+                      ]
                   },
                   "Action": "sts:AssumeRole"
                } ]
@@ -193,11 +196,22 @@
                 {
                   "Action": [
                       "s3:Get*",
-                      "s3:List*"
+                      "s3:List*",
+                      "cloudwatch:PutMetricData",
+                      "ds:CreateComputer",
+                      "ds:DescribeDirectories",
+                      "ec2:*",
+                      "logs:*",
+                      "ssm:*",
+                      "ec2messages:*"
                   ],
                   "Effect": "Allow",
-                  "Resource": "*"
-                }
+                  "Resource": [
+                    "*",
+                    "arn:aws:logs:*:*:*"
+                  ]
+                },
+
               ]
             },
             "Roles": [ {
