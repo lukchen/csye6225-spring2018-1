@@ -2,8 +2,8 @@ var fs = require("fs");
 var base64ToImage = require('base64-to-image');
 var AWS = require('aws-sdk');
 AWS.config.update({ 
-    accessKeyId: 'AKIAIX576KS4YMKKWZEQ', 
-  secretAccessKey: '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',
+    // accessKeyId: '', 
+    // secretAccessKey: '',
     region: 'us-east-1' 
 });
 var s3 = new AWS.S3();
