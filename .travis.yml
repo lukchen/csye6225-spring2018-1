@@ -9,7 +9,9 @@ install:
 
 branches:
   only:
+
   - master 
+
 
 script:
   - pwd
@@ -34,7 +36,9 @@ deploy:
     access_key_id: $access_key_id
     secret_access_key: $secret_access_key
     on:
+
       branch: master
+
   - provider: codedeploy
     access_key_id: $access_key_id
     bucket: $s3_bucket

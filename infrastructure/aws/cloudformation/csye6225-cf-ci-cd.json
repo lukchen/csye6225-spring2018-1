@@ -22,7 +22,7 @@
       "codedeployBucket" : {
         "Type" : "AWS::S3::Bucket",
          "Properties" : {
-           "BucketName" : "code-deploy.csye6225-spring2018-zenan.me"
+           "BucketName" : "code-deploy.csye6225-spring2018-jiaxi.me"
         }
       },
 
@@ -33,7 +33,7 @@
           "FunctionName" : "lambdatest",
           "Role": { "Fn::GetAtt" : ["LambdaExecutionRole", "Arn"] },
           "Code": {
-            "S3Bucket": "lambda-function-zenan",
+            "S3Bucket": "lambda-function-jiaxi",
             "S3Key": "lambdacode.zip"
           },
           "Runtime": "nodejs6.10",
@@ -210,7 +210,7 @@
                     "*",
                     "arn:aws:logs:*:*:*"
                   ]
-                },
+                }
 
               ]
             },
@@ -244,6 +244,6 @@
           },
           "Groups" : [ "csye6225-spring2018-team" ]
         }
-      },
+      }
    }
 }

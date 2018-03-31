@@ -26,14 +26,15 @@ ParameterKey=lambdaarn,ParameterValue=$Lambdaarn
 
 sleep 60
 EC2_ID=$(aws ec2 describe-instances --filter "Name=tag:Name,Values=MyTag" --query 'Reservations[*].Instances[*].{id:InstanceId}' --output text)
-echo $EC2_ID
+# echo $EC2_ID
 
 ProfileName=$(aws iam list-instance-profiles-for-role --role-name CodeDeployEC2ServiceRole \
 --query 'InstanceProfiles[*].InstanceProfileName' --output text)
-echo $ProfileName
+# echo $ProfileName
 
 aws ec2 associate-iam-instance-profile --instance-id $EC2_ID --iam-instance-profile Name=$ProfileName
-aws ec2 describe-iam-instance-profile-associations
+
+# aws ec2 describe-iam-instance-profile-associations
 
 aws ssm put-parameter --name "configfile" --type "String" --value file://myconfig.json
 
@@ -42,8 +43,8 @@ status=$(aws cloudformation describe-stacks --stack-name $stack --query 'Stacks[
 while [ $status != "CREATE_COMPLETE" ]
 	do 
 	echo "Stack $stack is creating, current status is $status ......"
-	sleep 10
+	sleep 30
 	status=$(aws cloudformation describe-stacks --stack-name $stack --query 'Stacks[*].StackStatus[]' --output text)
 	done
-
+	
 echo "------Stack $stack is created!------"

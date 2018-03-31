@@ -1,6 +1,7 @@
 var AWS = require('aws-sdk');
 
 AWS.config.update({
+
   region: 'us-east-1'
 });
 
@@ -17,7 +18,7 @@ class ResetControllers {
             var params = {
               Message: user, /* required */
               Subject: 'Passwrod Reset',
-              TopicArn: 'arn:aws:sns:us-east-1:117941579736:password_reset'
+              TopicArn: 'arn:aws:sns:us-east-1:491833366348:password_reset'
             };
             var res = await sns.publish(params).promise();
             if(res) ctx.body="publish successfull!"

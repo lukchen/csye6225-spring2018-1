@@ -120,7 +120,7 @@
                {
                  "Key" : "Name",
                  "Value" : "MyTag"
-               },  
+               } 
             ]           
          }
       },
@@ -131,7 +131,7 @@
             "Size" : { "Ref" : "Size" },
             "Encrypted" : "true",
             "VolumeType" : { "Ref" : "VolumeType" },
-            "AvailabilityZone" : { "Fn::GetAtt" : [ "EC2", "AvailabilityZone" ] },
+            "AvailabilityZone" : { "Fn::GetAtt" : [ "EC2", "AvailabilityZone" ] }
          }
       },
 
@@ -208,9 +208,9 @@
       "ImageS3Bucket" : {
         "Type" : "AWS::S3::Bucket",
          "Properties" : {
-           "BucketName" : "s3.csye6225-spring2018-zenan.me"
+           "BucketName" : "s3.csye6225-spring2018-jiaxi.me"
         }
-      },
+      }
 
     } 
 }

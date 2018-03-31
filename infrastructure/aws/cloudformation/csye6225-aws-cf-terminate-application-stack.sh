@@ -5,7 +5,7 @@ aws cloudformation describe-stacks
 read -p "Please enter the Stack name you want to delete: " stack
 
 echo "Now clear the stack bucket ......"
-aws s3 rm s3://s3.csye6225-spring2018-zenan.me --recursive
+aws s3 rm s3://s3.csye6225-spring2018-jiaxi.me --recursive
 
 echo "Start to change instance termination in Stack $stack... "
 EC2_ID=$(aws ec2 describe-instances --filter "Name=tag:Name,Values=MyTag" --query 'Reservations[*].Instances[*].{id:InstanceId}' --output text)
@@ -20,7 +20,7 @@ status=$(aws cloudformation describe-stacks --stack-name $stack --query 'Stacks[
 while [ $status != "DELETE_COMPLETE" ]
 	do 
 	echo "Deleting Stack $stack, current status is $status ......"
-	sleep 10
+	sleep 30
 	status=$(aws cloudformation describe-stacks --stack-name $stack --query 'Stacks[*].StackStatus[]' --output text)
 	done
 echo "Stack $stack is deleted"
