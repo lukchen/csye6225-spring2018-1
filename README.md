@@ -1,4 +1,4 @@
-[Demo Link](http://ec2-54-89-171-91.compute-1.amazonaws.com:8080)
+[Demo Link](http://ec2-54-234-120-255.compute-1.amazonaws.com:8080)
 Use valid email to sign up and login, the user profile data stored in RDS and S3 Bucket
 
 ## Team member
@@ -18,6 +18,8 @@ Application looks:
 ![image](https://github.com/lukchen/csye6225-spring2018/blob/master/Screenshot%20from%202018-03-07%2021-31-50.png)
 ![image](https://github.com/lukchen/csye6225-spring2018/blob/master/Screenshot%20from%202018-03-07%2021-32-50.png)
 
+
+usage:
 
 usage:
 
