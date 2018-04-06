@@ -1,13 +1,12 @@
 var AWS = require('aws-sdk');
 
 AWS.config.update({
-
-  region: 'us-east-1'
+    accessKeyId: 'AKIAJXBLKRCTZOUPJ4FQ', 
+    secretAccessKey: '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',
+    region: 'us-east-1'
 });
 
 var sns = new AWS.SNS();
-
-
 
 class ResetControllers {
     async publishsns(ctx, callback) {
