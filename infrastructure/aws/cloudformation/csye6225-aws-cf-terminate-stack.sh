@@ -19,4 +19,4 @@ while [ $status != "DELETE_COMPLETE" ]
 
 echo "------Stack $stack is deleted !------"
 
-aws ec2 delete-tags --resources $EC_ID --tags Key=Name,Value=MyTag
+aws ec2 delete-tags --resources $EC2_ID --tags Key=Name,Value=MyTag

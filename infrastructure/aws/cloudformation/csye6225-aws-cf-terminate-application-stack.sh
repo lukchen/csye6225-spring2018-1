@@ -24,3 +24,5 @@ while [ $status != "DELETE_COMPLETE" ]
 	status=$(aws cloudformation describe-stacks --stack-name $stack --query 'Stacks[*].StackStatus[]' --output text)
 	done
 echo "Stack $stack is deleted"
+
+
