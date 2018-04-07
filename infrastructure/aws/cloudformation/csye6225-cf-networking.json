@@ -84,7 +84,7 @@
 	  		}
 		},
 
-    "csye6225subnetfordb2": {
+    	"csye6225subnetfordb2": {
         "Type" : "AWS::EC2::Subnet",
           "Properties" : {
           "CidrBlock" : "10.0.2.0/24",
