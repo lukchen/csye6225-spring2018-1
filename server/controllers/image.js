@@ -3,8 +3,8 @@ var base64ToImage = require('base64-to-image');
 var AWS = require('aws-sdk');
 AWS.config.update({ 
 
-    // accessKeyId: '', 
-    // secretAccessKey: '',
+    accessKeyId: 'AKIAJXBLKRCTZOUPJ4FQ', 
+    secretAccessKey: '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',
 
     region: 'us-east-1' 
 });
