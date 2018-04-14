@@ -1,6 +1,7 @@
 {
    "AWSTemplateFormatVersion" : "2010-09-09",
    "Description" : "EC2",
+   
    "Parameters" : {
     
     "STACKNAME": {
@@ -30,7 +31,12 @@
       "Default" : "gp2"
     },
 
-    "PublicSubnetId":{
+    "PublicSubnetId1":{
+      "Type" : "String",
+      "Default" : ""
+    },
+
+    "PublicSubnetId2":{
       "Type" : "String",
       "Default" : ""
     },
@@ -45,16 +51,6 @@
       "Default" : ""
     },
 
-    "ec2SG":{
-      "Type" : "String",
-      "Default" : ""
-    },
-
-    "RDSSG":{
-      "Type" : "String",
-      "Default" : ""
-    },
-
     "csye6225vpc":{
       "Type" : "String",
       "Default" : ""
@@ -63,24 +59,57 @@
     "lambdaarn":{
       "Type" : "String",
       "Default" : ""
+    },
+
+    "domainName":{
+      "Type":"String",
+      "Default":"csye6225-spring2018-jiaxi.me."
+    },
+
+    "EC2Profile":{
+      "Type" : "String",
+      "Default" : ""
+    },
+
+    "SSLCertificate":{
+      "Type":"String",
+      "Default":"arn:aws:acm:us-east-1:491833366348:certificate/f57bec95-cae6-4d0e-a4d1-8fadf0b227fc"
     }
+
    },
 
    "Resources" : {
 
-      "EC2" : {
-         "Type" : "AWS::EC2::Instance",
-         "Properties" : {
-            "ImageId" : { "Ref" : "ImageId" },
-            "SecurityGroupIds": [
-              {"Ref" : "ec2SG" }
-            ],
-            "SubnetId": {"Ref" : "PublicSubnetId" }, 
-            "KeyName": "MyKeyPair",
-            "InstanceType" : { "Ref" : "InstanceType" },
-            "DisableApiTermination" : "true",
-            "UserData": {
-              "Fn::Base64": {
+      "WebServerGroup":{
+        "Type":"AWS::AutoScaling::AutoScalingGroup",
+        "Properties":{
+          "LaunchConfigurationName":{"Ref":"LaunchConfig"},
+          "VPCZoneIdentifier":[{"Ref":"PrivateSubnetId1"},{"Ref":"PrivateSubnetId2"}],
+          "MinSize":"3",
+          "MaxSize":"7",
+          "Cooldown":"60",
+          "DesiredCapacity":"3",
+          "Tags":[{
+            "Key":"Name",
+            "Value":"MyTag",
+            "PropagateAtLaunch":"true"
+          },{
+            "Key":"Name1",
+            "Value":"MyTag1",
+            "PropagateAtLaunch":"false"
+          }
+        ]}
+      },
+
+      "LaunchConfig" : {
+        "Type":"AWS::AutoScaling::LaunchConfiguration",
+        "Properties":{
+          "ImageId":{"Ref":"ImageId"},
+          "InstanceType":{"Ref":"InstanceType"},
+          "KeyName":"MyKeyPair",
+          "AssociatePublicIpAddress":true,
+          "UserData":{
+            "Fn::Base64": {
                   "Fn::Join": [
                     "",
                     [
@@ -113,27 +142,206 @@
                       "sudo service codedeploy-agent start \n"
                     ]
                   ]
+            }
+          },
+          "SecurityGroups":[{"Ref":"ec2SG"}],
+          "IamInstanceProfile": { "Ref": "EC2Profile" }
+        }
+      },
+      
+      "WebServerScaleUpPolicy":{
+        "Type":"AWS::AutoScaling::ScalingPolicy",
+        "Properties":{
+          "AdjustmentType":"ChangeInCapacity",
+          "AutoScalingGroupName":{
+            "Ref":"WebServerGroup"
+          },
+          "Cooldown":"60",
+          "ScalingAdjustment":"1"
+        }
+      },
+
+      "WebServerScaleDownPolicy":{
+        "Type":"AWS::AutoScaling::ScalingPolicy",
+        "Properties":{
+          "AdjustmentType":"ChangeInCapacity",
+          "AutoScalingGroupName":{
+            "Ref":"WebServerGroup"
+          },
+          "Cooldown":"60",
+          "ScalingAdjustment":"-1"
+        }
+      },
+
+      "CPUAlarmHigh":{
+        "Type":"AWS::CloudWatch::Alarm",
+        "Properties":{
+          "AlarmDescription":"Scale-up if CPU >10% for 10 minutes",
+          "MetricName":"CPUUtilization",
+          "Namespace":"AWS/EC2",
+          "Statistic":"Average",
+          "Period":"300",
+          "EvaluationPeriods":"2",
+          "Threshold":"10",
+          "AlarmActions":[{
+            "Ref":"WebServerScaleUpPolicy"
+          }],
+          "Dimensions":[{
+            "Name":"AutoScalingGroupName",
+            "Value":{
+              "Ref":"WebServerGroup"
+            }
+          }],
+          "ComparisonOperator":"GreaterThanThreshold"
+        }
+      },
+
+      "CPUAlarmLow":{
+        "Type":"AWS::CloudWatch::Alarm",
+        "Properties":{
+          "AlarmDescription":"Scale-up if CPU <8% for 10 minutes",
+          "MetricName":"CPUUtilization",
+          "Namespace":"AWS/EC2",
+          "Statistic":"Average",
+          "Period":"300",
+          "EvaluationPeriods":"2",
+          "Threshold":"8",
+          "AlarmActions":[{
+            "Ref":"WebServerScaleDownPolicy"
+          }],
+          "Dimensions":[{
+            "Name":"AutoScalingGroupName",
+            "Value":{
+              "Ref":"WebServerGroup"
+            }
+          }],
+          "ComparisonOperator":"LessThanThreshold"
+        }
+      },
+
+      "LoadBalancer":{
+        "Type":"AWS::ElasticLoadBalancingV2::LoadBalancer",
+        "Properties":{
+          "Subnets":[{
+            "Ref":"PublicSubnetId1"
+          },{
+            "Ref":"PublicSubnetId2"
+          }]
+        }
+      },
+
+      "myDNS" : {
+        "Type" : "AWS::Route53::RecordSetGroup",
+        "Properties" : {
+          "HostedZoneName" : {"Ref":"domainName"},
+          "Comment" : "Zone apex alias targeted to myELB LoadBalancer.",
+          "RecordSets" : [
+            {
+              "Name" : {"Ref":"domainName"},
+              "Type" : "A",
+              "AliasTarget" : {
+                  "HostedZoneId" : { "Fn::GetAtt" : ["LoadBalancer", "CanonicalHostedZoneID"] },
+                  "DNSName" : { "Fn::GetAtt" : ["LoadBalancer","DNSName"] }
               }
-            },
-
-            "Tags" : [
-               {
-                 "Key" : "Name",
-                 "Value" : "MyTag"
-               } 
-            ]           
-         }
+            }
+          ]
+        }
       },
 
-      "Volume" : {
-         "Type":"AWS::EC2::Volume",
-         "Properties" : {
-            "Size" : { "Ref" : "Size" },
-            "Encrypted" : "true",
-            "VolumeType" : { "Ref" : "VolumeType" },
-            "AvailabilityZone" : { "Fn::GetAtt" : [ "EC2", "AvailabilityZone" ] }
-         }
+      "LBListener":{
+        "Type":"AWS::ElasticLoadBalancingV2::Listener",
+        "Properties":{
+          "Certificates":"SSLCertificate",
+          "DefaultActions":[{
+            "Type":"forward",
+            "TargetGroupArn":{"Ref":"LBTargetGroup"}
+          }],
+          "LoadBalancerArn":{"Ref":"LoadBalancer"},
+          "Port":"8080",
+          "Protocol":"HTTP"
+        }
       },
+
+      "LBTargetGroup":{
+        "Type":"AWS::ElasticLoadBalancingV2::TargetGroup",
+        "Properties":{
+          "HealthCheckIntervalSeconds":"30",
+          "HealthCheckTimeoutSeconds":"5",
+          "HealthyThresholdCount":"3",
+          "Port":"8080",
+          "Protocol":"HTTP",
+          "UnhealthyThresholdCount":"5",
+          "VpcId":{"Ref":"csye6225vpc"}
+        }
+      },
+      
+      "ec2SG": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "csye6225vpc"
+                },
+                "GroupName": "csye6225-webapp",
+                "GroupDescription": "ec2 SecurityGroup",
+                "SecurityGroupIngress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "80",
+                        "ToPort": "80",
+                        "CidrIp": "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "22",
+                        "ToPort": "22",
+                        "CidrIp": "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "443",
+                        "ToPort": "443",
+                        "CidrIp": "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "8080",
+                        "ToPort": "8080",
+                        "SourceSecurityGroupId":{
+                          "Fn::Select":[
+                            0,
+                            {
+                              "Fn::GetAtt":["LoadBalancer","SecurityGroups"]
+                            }
+                          ]
+                        }
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "3000",
+                        "ToPort": "3000",
+                        "CidrIp": "0.0.0.0/0"
+                    }
+                ]
+            }
+      },
+
+      "DBSecurityGroup": {
+        	"Type": "AWS::EC2::SecurityGroup",
+        	"Properties": {
+        	"Tags" :  [{"Key" : "Name", "Value" : "RDSSG"}],
+            "GroupName":"csye6225-rds",
+            "GroupDescription": "database",
+            "VpcId":{"Ref":"csye6225vpc"},
+            "SecurityGroupIngress": [
+                {
+                    "IpProtocol": "tcp",
+                    "FromPort": "3306",
+                    "ToPort": "3306",
+                    "SourceSecurityGroupId" : {"Ref":"ec2SG"}
+                }
+            ]
+        	}
+    	}, 
 
       "myDynamoDBTable" : {
         "Type" : "AWS::DynamoDB::Table",
@@ -172,7 +380,7 @@
           "EngineVersion" : "5.6.37",
           "DBInstanceClass" : "db.t2.medium",
           "VPCSecurityGroups" : [
-            {"Ref" : "RDSSG"}
+            {"Ref" : "DBSecurityGroup"}
           ],
           "DBSubnetGroupName": {"Ref" : "myDBSubnetGroup" },
           "MultiAZ" : "false",
@@ -182,14 +390,14 @@
           "PubliclyAccessible" : "false",
           "Tags" : [ { "Key" : "Name", "Value" : "csye6225" } ],
           "AllocatedStorage" : "10"
-        }
+        }    
       },
 
       "myDBSubnetGroup" : {
          "Type" : "AWS::RDS::DBSubnetGroup",
          "Properties" : {
             "DBSubnetGroupDescription" : "description",
-            "SubnetIds" : [ {"Ref" : "PrivateSubnetId1" }, {"Ref" : "PrivateSubnetId2" } ],
+            "SubnetIds" : [{"Ref":"PrivateSubnetId1"},{"Ref":"PrivateSubnetId2"}],
             "Tags" : [ {"Key" : "String", "Value" : "String"} ]
          }
       },
@@ -211,6 +419,5 @@
            "BucketName" : "s3.csye6225-spring2018-jiaxi.me"
         }
       }
-
-    } 
+  }
 }
