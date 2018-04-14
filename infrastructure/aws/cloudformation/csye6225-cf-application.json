@@ -69,11 +69,6 @@
     "EC2Profile":{
       "Type" : "String",
       "Default" : ""
-    },
-
-    "SSLCertificate":{
-      "Type":"String",
-      "Default":"arn:aws:acm:us-east-1:491833366348:certificate/f57bec95-cae6-4d0e-a4d1-8fadf0b227fc"
     }
 
    },
@@ -251,14 +246,29 @@
       "LBListener":{
         "Type":"AWS::ElasticLoadBalancingV2::Listener",
         "Properties":{
-          "Certificates":"SSLCertificate",
           "DefaultActions":[{
             "Type":"forward",
             "TargetGroupArn":{"Ref":"LBTargetGroup"}
           }],
           "LoadBalancerArn":{"Ref":"LoadBalancer"},
-          "Port":"8080",
+          "Port":"80",
           "Protocol":"HTTP"
+        }
+      },
+
+      "LBListener1":{
+        "Type":"AWS::ElasticLoadBalancingV2::Listener",
+        "Properties":{
+          "Certificates":[
+            {"CertificateArn":"arn:aws:acm:us-east-1:491833366348:certificate/f57bec95-cae6-4d0e-a4d1-8fadf0b227fc"}
+          ],
+          "DefaultActions":[{
+            "Type":"forward",
+            "TargetGroupArn":{"Ref":"LBTargetGroup"}
+          }],
+          "LoadBalancerArn":{"Ref":"LoadBalancer"},
+          "Port":"443",
+          "Protocol":"HTTPS"
         }
       },
 
@@ -268,7 +278,7 @@
           "HealthCheckIntervalSeconds":"30",
           "HealthCheckTimeoutSeconds":"5",
           "HealthyThresholdCount":"3",
-          "Port":"8080",
+          "Port":"80",
           "Protocol":"HTTP",
           "UnhealthyThresholdCount":"5",
           "VpcId":{"Ref":"csye6225vpc"}
