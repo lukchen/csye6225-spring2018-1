@@ -19,7 +19,7 @@ aws ec2 disassociate-iam-instance-profile --association-id $AssociationId
 
 aws iam remove-role-from-instance-profile --instance-profile-name $ProfileName --role-name CodeDeployEC2ServiceRole
 aws iam delete-instance-profile --instance-profile-name $ProfileName
-aws iam delete-role-policy --role-name CodeDeployEC2ServiceRole --policy-name CodeDeployEC2S3
+aws iam delete-role-policy --role-name CodeDeployEC2ServiceRole --policy-name CodeDeploy-EC2-S3
 aws iam delete-role --role-name CodeDeployEC2ServiceRole
 aws cloudformation delete-stack  --stack-name $stack
 
