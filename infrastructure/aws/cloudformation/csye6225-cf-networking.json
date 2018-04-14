@@ -1,7 +1,11 @@
 {
    "AWSTemplateFormatVersion" : "2010-09-09",
+   
+   "Description":"Create VPC, subnets",
+   
    "Resources" : {
-        "csye6225vpc": {
+		
+		"csye6225vpc": {
 			"Type": "AWS::EC2::VPC",
 			"Properties": {
 				"CidrBlock": "10.0.0.0/16",
@@ -14,8 +18,8 @@
 			    ]
 			}
 		},
-
-        "csye6225InternetGateway": {
+		
+		"csye6225InternetGateway": {
 			"Type": "AWS::EC2::InternetGateway",
 			"Properties": {
 				"Tags": [
@@ -63,42 +67,54 @@
   			}
   		},
 
-  		"csye6225subnetforservers": {
+  		"csye6225subnetforservers1": {
 		    "Type" : "AWS::EC2::Subnet",
 	        "Properties" : {
-			    "CidrBlock" : "10.0.0.0/24",
+				"CidrBlock" : "10.0.0.0/24",
+				"AvailabilityZone":"us-east-1a",
 			    "MapPublicIpOnLaunch" : "true",
 			    "VpcId" : {"Ref": "csye6225vpc"},
-			    "Tags": [{"Key": "Name", "Value": "public"}]
+			    "Tags": [{"Key": "Name", "Value": "public1"}]
+	  		}
+		},
+
+		"csye6225subnetforservers2": {
+		    "Type" : "AWS::EC2::Subnet",
+	        "Properties" : {
+				"CidrBlock" : "10.0.1.0/24",
+				"AvailabilityZone":"us-east-1d",
+			    "MapPublicIpOnLaunch" : "true",
+			    "VpcId" : {"Ref": "csye6225vpc"},
+			    "Tags": [{"Key": "Name", "Value": "public2"}]
 	  		}
 		},
 
 		"csye6225subnetfordb1": {
 		    "Type" : "AWS::EC2::Subnet",
 	        "Properties" : {
-			    "CidrBlock" : "10.0.1.0/24",
-          "AvailabilityZone" : "us-east-1a",
+			    "CidrBlock" : "10.0.2.0/24",
+          		"AvailabilityZone" : "us-east-1a",
 			    "MapPublicIpOnLaunch" : "false",
 			    "VpcId" : {"Ref": "csye6225vpc"},
-          "Tags": [{"Key": "Name", "Value": "private1"}]
+          		"Tags": [{"Key": "Name", "Value": "private1"}]
 	  		}
 		},
 
     	"csye6225subnetfordb2": {
-        "Type" : "AWS::EC2::Subnet",
-          "Properties" : {
-          "CidrBlock" : "10.0.2.0/24",
-          "AvailabilityZone" : "us-east-1d",
-          "MapPublicIpOnLaunch" : "false",
-          "VpcId" : {"Ref": "csye6225vpc"},
-          "Tags": [{"Key": "Name", "Value": "private2"}]
-        }
-    },
+          	"Type" : "AWS::EC2::Subnet",
+          	"Properties" : {
+        		"CidrBlock" : "10.0.3.0/24",
+          		"AvailabilityZone" : "us-east-1d",
+          		"MapPublicIpOnLaunch" : "false",
+          		"VpcId" : {"Ref": "csye6225vpc"},
+          		"Tags": [{"Key": "Name", "Value": "private2"}]
+        	}
+    	},
 
 		"mySubnetRouteTableAssociation1" : {
             "Type" : "AWS::EC2::SubnetRouteTableAssociation",
             "Properties" : {
-	            "SubnetId" : { "Ref" : "csye6225subnetforservers" },
+	            "SubnetId" : { "Ref" : "csye6225subnetforservers1" },
 	            "RouteTableId" : { "Ref" : "csye6225publicroutetable" }
         	}
       	},
@@ -111,77 +127,22 @@
         	}
       	},
 
-
         "mySubnetRouteTableAssociation3" : {
             "Type" : "AWS::EC2::SubnetRouteTableAssociation",
             "Properties" : {
               "SubnetId" : { "Ref" : "csye6225subnetfordb2" },
               "RouteTableId" : { "Ref" : "csye6225privateroutetable" }
           }
-        },    
+        },      
 
-
-      	"ec2SG": {
-            "Type": "AWS::EC2::SecurityGroup",
-            "Properties": {
-                "VpcId": {
-                    "Ref": "csye6225vpc"
-                },
-                "GroupName": "csye6225-webapp",
-                "GroupDescription": "ec2 SecurityGroup",
-                "SecurityGroupIngress": [
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": "80",
-                        "ToPort": "80",
-                        "CidrIp": "0.0.0.0/0"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": "22",
-                        "ToPort": "22",
-                        "CidrIp": "0.0.0.0/0"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": "443",
-                        "ToPort": "443",
-                        "CidrIp": "0.0.0.0/0"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": "8080",
-                        "ToPort": "8080",
-                        "CidrIp": "0.0.0.0/0"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": "3000",
-                        "ToPort": "3000",
-                        "CidrIp": "0.0.0.0/0"
-                    }
-                ]
-            }
-        },
-
-    "DBSecurityGroup": {
-        "Type": "AWS::EC2::SecurityGroup",
-        "Properties": {
-        "Tags" :  [{"Key" : "Name", "Value" : "RDSSG"}],
-            "GroupName":"csye6225-rds",
-            "GroupDescription": "database",
-            "VpcId":{"Ref":"csye6225vpc"},
-            "SecurityGroupIngress": [
-                {
-                    "IpProtocol": "tcp",
-                    "FromPort": "3306",
-                    "ToPort": "3306",
-                    "SourceSecurityGroupId" : {"Ref":"ec2SG"}
-                }
-            ]
-        }
-    },   
-
+		"mySubnetRouteTableAssociation4" : {
+            "Type" : "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties" : {
+	            "SubnetId" : { "Ref" : "csye6225subnetforservers2" },
+	            "RouteTableId" : { "Ref" : "csye6225publicroutetable" }
+        	}
+		},
+		  
 		"csye6225route": {
 			"Type": "AWS::EC2::Route",
 			"DependsOn": "AttachGateway",
