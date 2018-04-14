@@ -80,6 +80,7 @@
         "Properties":{
           "LaunchConfigurationName":{"Ref":"LaunchConfig"},
           "VPCZoneIdentifier":[{"Ref":"PrivateSubnetId1"},{"Ref":"PrivateSubnetId2"}],
+          "TargetGroupARNs":[{"Ref":"LBTargetGroup"}],
           "MinSize":"3",
           "MaxSize":"7",
           "Cooldown":"60",
