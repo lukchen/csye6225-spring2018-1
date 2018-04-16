@@ -8,7 +8,7 @@ echo "Now clear the stack bucket ......"
 aws s3 rm s3://s3.csye6225-spring2018-jiaxi.me --recursive
 
 echo "Start to change instance termination in Stack $stack... "
-#EC2_ID=$(aws ec2 describe-instances --filter "Name=tag:Name,Values=MyTag" --query 'Reservations[*].Instances[*].{id:InstanceId}' --output text)
+EC2_ID=$(aws ec2 describe-instances --filter "Name=tag:Name,Values=MyTag" --query 'Reservations[*].Instances[*].{id:InstanceId}' --output text)
 #aws ec2 modify-instance-attribute --instance-id $EC2_ID --no-disable-api-termination 
 
 echo "Start to delete Stack $stack..."

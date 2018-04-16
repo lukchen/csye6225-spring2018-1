@@ -4,8 +4,8 @@ publicSubnetId1=$(aws ec2 describe-subnets --filter "Name=tag:Name,Values=public
 publicSubnetId2=$(aws ec2 describe-subnets --filter "Name=tag:Name,Values=public2" --query 'Subnets[*].SubnetId' --output text)
 privateSubnetId1=$(aws ec2 describe-subnets --filter "Name=tag:Name,Values=private1" --query 'Subnets[*].SubnetId' --output text)
 privateSubnetId2=$(aws ec2 describe-subnets --filter "Name=tag:Name,Values=private2" --query 'Subnets[*].SubnetId' --output text)
-#ec2SGId=$(aws ec2 describe-security-groups --filter "Name=group-name,Values=csye6225-webapp" --query 'SecurityGroups[*].GroupId' --output text)
-#RDSSG=$(aws ec2 describe-security-groups --filter "Name=group-name,Values=csye6225-rds" --query 'SecurityGroups[*].GroupId' --output text)
+ec2SGId=$(aws ec2 describe-security-groups --filter "Name=group-name,Values=csye6225-webapp" --query 'SecurityGroups[*].GroupId' --output text)
+RDSSG=$(aws ec2 describe-security-groups --filter "Name=group-name,Values=csye6225-rds" --query 'SecurityGroups[*].GroupId' --output text)
 VpcId=$(aws ec2 describe-vpcs --filter "Name=tag:Name,Values=STACK_NAME-csye6225-vpc" --query 'Vpcs[*].VpcId' --output text)
 Lambdaarn=$(aws lambda get-function --function-name lambdatest --query 'Configuration.FunctionArn' --output text)
 ProfileName=$(aws iam list-instance-profiles-for-role --role-name CodeDeployEC2ServiceRole \
@@ -27,7 +27,9 @@ ParameterKey=csye6225vpc,ParameterValue=$VpcId \
 ParameterKey=PrivateSubnetId1,ParameterValue=$privateSubnetId1 \
 ParameterKey=PrivateSubnetId2,ParameterValue=$privateSubnetId2 \
 ParameterKey=lambdaarn,ParameterValue=$Lambdaarn \
-ParameterKey=EC2Profile,ParameterValue=$ProfileName
+ParameterKey=EC2Profile,ParameterValue=$ProfileName \
+ParameterKey=RDSSG,ParameterValue=$RDSSG \
+ParameterKey=ec2SG,ParameterValue=$ec2SGId
 
 sleep 60
 EC2_ID=$(aws ec2 describe-instances --filter "Name=tag:Name,Values=MyTag" --query 'Reservations[*].Instances[*].{id:InstanceId}' --output text)

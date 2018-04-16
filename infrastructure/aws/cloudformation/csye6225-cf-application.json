@@ -69,11 +69,70 @@
     "EC2Profile":{
       "Type" : "String",
       "Default" : ""
+    },
+
+    "RDSSG":{
+      "Type":"String",
+      "Default":""
+    },
+
+    "ec2SG":{
+      "Type" : "String",
+      "Default" : ""
     }
 
    },
 
    "Resources" : {
+      "WebSecurityGroup": {
+        "Type": "AWS::EC2::SecurityGroup",
+        "Properties": {
+          "VpcId": {
+              "Ref": "csye6225vpc"
+          }, 
+          "GroupDescription": "Web SecurityGroup",
+          "SecurityGroupIngress": [
+              
+              {
+                  "IpProtocol": "tcp",
+                  "FromPort": "22",
+                  "ToPort": "22",
+                  "CidrIp": "0.0.0.0/0"
+              },
+              {
+                  "IpProtocol": "tcp",
+                  "FromPort": "443",
+                  "ToPort": "443",
+                  "CidrIp": "0.0.0.0/0"
+              },
+              {
+                  "IpProtocol": "tcp",
+                  "FromPort": "80",
+                  "ToPort": "80",
+                  "SourceSecurityGroupId":{
+                    "Fn::Select":[
+                      0,
+                      {
+                        "Fn::GetAtt":["LoadBalancer","SecurityGroups"]
+                      }
+                    ]
+                  }
+              },
+              {
+                "IpProtocol": "tcp",
+                  "FromPort": "8080",
+                  "ToPort": "8080",
+                  "CidrIp": "0.0.0.0/0"
+              },
+              {
+                  "IpProtocol": "tcp",
+                  "FromPort": "3000",
+                  "ToPort": "3000",
+                  "CidrIp": "0.0.0.0/0"
+              }
+          ]
+        }
+      },
 
       "WebServerGroup":{
         "Type":"AWS::AutoScaling::AutoScalingGroup",
@@ -140,7 +199,7 @@
                   ]
             }
           },
-          "SecurityGroups":[{"Ref":"ec2SG"}],
+          "SecurityGroups":[{"Ref":"WebSecurityGroup"}],
           "IamInstanceProfile": { "Ref": "EC2Profile" }
         }
       },
@@ -222,7 +281,8 @@
             "Ref":"PublicSubnetId1"
           },{
             "Ref":"PublicSubnetId2"
-          }]
+          }],
+          "SecurityGroups":[{"Ref":"ec2SG"}]
         }
       },
 
@@ -279,80 +339,12 @@
           "HealthCheckIntervalSeconds":"30",
           "HealthCheckTimeoutSeconds":"5",
           "HealthyThresholdCount":"3",
-          "Port":"80",
+          "Port":"8080",
           "Protocol":"HTTP",
           "UnhealthyThresholdCount":"5",
           "VpcId":{"Ref":"csye6225vpc"}
         }
-      },
-      
-      "ec2SG": {
-            "Type": "AWS::EC2::SecurityGroup",
-            "Properties": {
-                "VpcId": {
-                    "Ref": "csye6225vpc"
-                },
-                "GroupName": "csye6225-webapp",
-                "GroupDescription": "ec2 SecurityGroup",
-                "SecurityGroupIngress": [
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": "80",
-                        "ToPort": "80",
-                        "CidrIp": "0.0.0.0/0"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": "22",
-                        "ToPort": "22",
-                        "CidrIp": "0.0.0.0/0"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": "443",
-                        "ToPort": "443",
-                        "CidrIp": "0.0.0.0/0"
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": "8080",
-                        "ToPort": "8080",
-                        "SourceSecurityGroupId":{
-                          "Fn::Select":[
-                            0,
-                            {
-                              "Fn::GetAtt":["LoadBalancer","SecurityGroups"]
-                            }
-                          ]
-                        }
-                    },
-                    {
-                        "IpProtocol": "tcp",
-                        "FromPort": "3000",
-                        "ToPort": "3000",
-                        "CidrIp": "0.0.0.0/0"
-                    }
-                ]
-            }
-      },
-
-      "DBSecurityGroup": {
-        	"Type": "AWS::EC2::SecurityGroup",
-        	"Properties": {
-        	"Tags" :  [{"Key" : "Name", "Value" : "RDSSG"}],
-            "GroupName":"csye6225-rds",
-            "GroupDescription": "database",
-            "VpcId":{"Ref":"csye6225vpc"},
-            "SecurityGroupIngress": [
-                {
-                    "IpProtocol": "tcp",
-                    "FromPort": "3306",
-                    "ToPort": "3306",
-                    "SourceSecurityGroupId" : {"Ref":"ec2SG"}
-                }
-            ]
-        	}
-    	}, 
+      }, 
 
       "myDynamoDBTable" : {
         "Type" : "AWS::DynamoDB::Table",
@@ -391,7 +383,7 @@
           "EngineVersion" : "5.6.37",
           "DBInstanceClass" : "db.t2.medium",
           "VPCSecurityGroups" : [
-            {"Ref" : "DBSecurityGroup"}
+            {"Ref" : "RDSSG"}
           ],
           "DBSubnetGroupName": {"Ref" : "myDBSubnetGroup" },
           "MultiAZ" : "false",
@@ -430,5 +422,5 @@
            "BucketName" : "s3.csye6225-spring2018-jiaxi.me"
         }
       }
-  }
+    }
 }
