@@ -155,6 +155,67 @@
 					"Ref": "csye6225InternetGateway"
 				}
 			}
-		}		
+		},
+		
+		"InstanceSG": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "csye6225vpc"
+                },
+                "GroupName": "csye6225-webapp",
+                "GroupDescription": "ec2 SecurityGroup",
+                "SecurityGroupIngress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "80",
+                        "ToPort": "80",
+                        "CidrIp": "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "22",
+                        "ToPort": "22",
+                        "CidrIp": "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "443",
+                        "ToPort": "443",
+                        "CidrIp": "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "8080",
+                        "ToPort": "8080",
+                        "CidrIp": "0.0.0.0/0"
+                    },
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "3000",
+                        "ToPort": "3000",
+                        "CidrIp": "0.0.0.0/0"
+                    }
+                ]
+            }
+        },
+
+    	"DBSecurityGroup": {
+        	"Type": "AWS::EC2::SecurityGroup",
+        	"Properties": {
+        		"Tags" :  [{"Key" : "Name", "Value" : "RDSSG"}],
+            	"GroupName":"csye6225-rds",
+            	"GroupDescription": "database",
+            	"VpcId":{"Ref":"csye6225vpc"},
+            	"SecurityGroupIngress": [
+                {
+                    "IpProtocol": "tcp",
+                    "FromPort": "3306",
+                    "ToPort": "3306",
+                    "SourceSecurityGroupId" : {"Ref":"InstanceSG"}
+                }
+            ]
+        	}
+    	}  
    }
 } 
