@@ -5,7 +5,7 @@ read -p "Please enter the Stack name you want to delete: " stack
 
 echo "Now clear the stack bucket ......"
 
-aws s3 rm s3://code-deploy.csye6225-spring2018-jiaxi.me --recursive
+aws s3 rm s3://code-deploy.csye6225-spring2018-zenan.me --recursive
 
 
 ProfileName=$(aws iam list-instance-profiles-for-role --role-name CodeDeployEC2ServiceRole --query 'InstanceProfiles[*].InstanceProfileName' --output text)
