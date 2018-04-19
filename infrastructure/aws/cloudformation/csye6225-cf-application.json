@@ -274,6 +274,19 @@
         }
       },
 
+      "LBListener2":{
+        "Type":"AWS::ElasticLoadBalancingV2::Listener",
+        "Properties":{
+          "DefaultActions":[{
+            "Type":"forward",
+            "TargetGroupArn":{"Ref":"LBTargetGroup1"}
+          }],
+          "LoadBalancerArn":{"Ref":"LoadBalancer"},
+          "Port":"3000",
+          "Protocol":"HTTP"
+        }
+      },
+
       "LBTargetGroup":{
         "Type":"AWS::ElasticLoadBalancingV2::TargetGroup",
         "Properties":{
@@ -281,6 +294,19 @@
           "HealthCheckTimeoutSeconds":"5",
           "HealthyThresholdCount":"3",
           "Port":"8080",
+          "Protocol":"HTTP",
+          "UnhealthyThresholdCount":"5",
+          "VpcId":{"Ref":"csye6225vpc"}
+        }
+      },
+
+      "LBTargetGroup1":{
+        "Type":"AWS::ElasticLoadBalancingV2::TargetGroup",
+        "Properties":{
+          "HealthCheckIntervalSeconds":"30",
+          "HealthCheckTimeoutSeconds":"5",
+          "HealthyThresholdCount":"3",
+          "Port":"3000",
           "Protocol":"HTTP",
           "UnhealthyThresholdCount":"5",
           "VpcId":{"Ref":"csye6225vpc"}
