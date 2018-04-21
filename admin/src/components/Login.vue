@@ -3,7 +3,7 @@
         <header class="login-head">
         </header>
         <section class="form">
-            <span class="slogan">Please Login!
+            <span class="slogan">Final Presentation!
                 <span>/ Login</span>
             </span>
             <input type="text" id="user" placeholder="Username" v-model="username">
