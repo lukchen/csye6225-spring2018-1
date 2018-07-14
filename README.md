@@ -6,7 +6,7 @@ Use valid email to sign up and login, the user profile data stored in RDS and S3
 * Zenan Chen  chen.zena@husky.neu.edu
 * Xinglong Jia  jia.xi@husky.neu.edu
 
-This web application is a seperation of back-end and front-end and use axios to send data, it basiclly contains three parts: server, client, admin.
+This web application is a separation of back-end and front-end and use axios to send data, it basiclly contains three parts: server, client, admin.
 
 Application stack: MySQL--Linux--Node.js(koa.js)-Vue.js
 
@@ -25,7 +25,7 @@ usage:
 
 ## Sign up/ Sign in
 
-  This project accomplised a website sign up/ sign in function, user's information will be store in database and password will be encrypted,
+  This project accomplished/comprised a website sign up/ sign in function, user's information will be stored in the database and password will be encrypted,
 
 ## Prerequisites
 
